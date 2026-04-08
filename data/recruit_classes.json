@@ -1,0 +1,306 @@
+[
+  {
+    "cls": "Line Contractor",
+    "adj": ["Reliable","Steady","Quiet","Hard-Worn","Disciplined","Standard-Issue"],
+    "givenNames": ["Maris","Dekel","Jorun","Seff","Tovar","Enne","Breck","Orla","Cade","Finn","Soli","Ruen"],
+    "surnames": ["Voss","Tarren","Holt","Creel","Bann","Selwyn","Dray","Mourne","Falk","Orin"],
+    "hireCostMult": 1.0,
+    "stats": { "str": [8,14], "end": [8,13], "lead": [2,5], "cun": [2,5] },
+    "magic": 0,
+    "desc": "Standard-rated contractor. Reliable in the line, low maintenance, gets the job done.",
+    "lore": "Backbone of every PMC. Doesn't file complaints. Doesn't ask questions about the contract. Usually.",
+    "bonuses": [],
+    "rarity": "common",
+    "rarityWeight": 80
+  },
+  {
+    "cls": "Augment Soldier",
+    "adj": ["Ward-Etched","Hex-Lined","Self-Buffed","Runed","Mana-Laced","Reinforced"],
+    "givenNames": ["Toven","Syla","Brek","Orla","Cade","Fenn","Joal","Maris","Dekel","Seff","Quill","Ruen"],
+    "surnames": ["Holt","Creel","Dray","Orin","Falk","Bann","Selwyn","Mourne","Voss","Tarren"],
+    "hireCostMult": 1.2,
+    "stats": { "str": [9,15], "end": [10,15], "lead": [2,5], "cun": [3,6] },
+    "magic": 1,
+    "desc": "Self-augmented line soldier. Standard personal wards, basic mana-channelling. The baseline for any competent ground unit.",
+    "lore": "Every soldier worth hiring can run their own basic ward array. This one keeps theirs current and calibrated. Small detail. Significant difference in the field.",
+    "bonuses": [
+      { "type": "hpRegenBonus", "value": 0.005, "desc": "Personal recovery workings: +0.5% HP regen" }
+    ],
+    "rarity": "common",
+    "rarityWeight": 70
+  },
+  {
+    "cls": "Recon Specialist",
+    "adj": ["Ghost-Sig","Low-Profile","Dark-Rated","Unseen","Off-Grid","Mana-Quiet"],
+    "givenNames": ["Selk","Vira","Tovar","Enne","Breck","Finn","Soli","Jorun","Cade","Maris","Bren","Quill"],
+    "surnames": ["Mourne","Falk","Creel","Dray","Selwyn","Holt","Orin","Bann","Tarren","Voss"],
+    "hireCostMult": 1.1,
+    "stats": { "str": [5,10], "end": [7,12], "lead": [1,4], "cun": [10,16] },
+    "magic": 0,
+    "desc": "Advance recon and route clearance. Reduces contract duration through prior intelligence.",
+    "lore": "Grew up in the uncoded border zones where the mana-grid drops out and the maps end. Every scar is a route she learned the hard way.",
+    "bonuses": [
+      { "type": "durationMult", "value": -0.10, "desc": "Recon advance work: -10% contract duration" }
+    ],
+    "rarity": "common",
+    "rarityWeight": 50
+  },
+  {
+    "cls": "Mana-Bow Specialist",
+    "adj": ["Tracking","Binding","Spirit-Aimed","Null-Tipped","Hex-Flighted","Precise"],
+    "givenNames": ["Lyra","Voss","Enne","Soli","Orla","Quill","Breck","Cade","Finn","Maris","Bren","Seff"],
+    "surnames": ["Tarren","Holt","Orin","Falk","Dray","Creel","Mourne","Bann","Selwyn","Voss"],
+    "hireCostMult": 1.4,
+    "stats": { "str": [5,10], "end": [7,12], "lead": [2,5], "cun": [11,17] },
+    "magic": 2,
+    "desc": "Ranged specialist with mana-channelled ammunition. Effective against warded targets.",
+    "lore": "Trained by a licensed hex-hunter in the deep uncoded zones. Her ammunition carries tracking, binding, or null-field payloads depending on the contract brief.",
+    "bonuses": [
+      { "type": "durationMult", "value": -0.08, "categoryFilter": "bounty", "desc": "Mana-tracking: -8% bounty contract duration" },
+      { "type": "rewardMult",   "value":  0.10, "categoryFilter": "bounty", "desc": "+10% bounty rewards" }
+    ],
+    "rarity": "uncommon",
+    "rarityWeight": 35
+  },
+  {
+    "cls": "Heavy Operator",
+    "adj": ["Reinforced","Hard-Rated","Armoured","Plated","Front-Line","Impact-Classed"],
+    "givenNames": ["Breck","Tovar","Dekel","Jorun","Bren","Seff","Cade","Maris","Finn","Toven","Joal","Orla"],
+    "surnames": ["Voss","Bann","Dray","Orin","Falk","Holt","Creel","Selwyn","Mourne","Tarren"],
+    "hireCostMult": 1.3,
+    "stats": { "str": [13,19], "end": [12,18], "lead": [3,7], "cun": [2,5] },
+    "magic": 0,
+    "desc": "Front-line engagement specialist. High mana-buffed physical output. Turns engagements.",
+    "lore": "Three active campaigns, came back from all of them. Doesn't discuss the second campaign. The augment scars from it are extensive.",
+    "bonuses": [
+      { "type": "rewardMult", "value": 0.12, "categoryFilter": "combat", "desc": "+12% combat contract rewards" }
+    ],
+    "rarity": "uncommon",
+    "rarityWeight": 35
+  },
+  {
+    "cls": "Rune Knight",
+    "adj": ["Inscribed","Ward-Forged","Rune-Clad","Sigil-Bound","Accord-Rated","Full-Array"],
+    "givenNames": ["Aldric","Serath","Vellen","Coryn","Thane","Mira","Jorath","Kael","Saren","Voss","Enne","Orla"],
+    "surnames": ["Ironwood","Ashveil","Goldmark","Duskfen","Stoneward","Pale","Verne","Crael","Orin","Tarren"],
+    "hireCostMult": 2.5,
+    "stats": { "str": [12,18], "end": [11,17], "lead": [6,10], "cun": [6,10] },
+    "magic": 3,
+    "desc": "Integrated combat mage. Rune arrays absorb hostile workings and amplify strike output. Rare and expensive.",
+    "lore": "Trained at an institute that teaches physical combat and arcane theory as a unified discipline. The inscriptions on their armour are not decorative — they are a running mana-circuit.",
+    "bonuses": [
+      { "type": "rewardMult",        "value": 0.15, "categoryFilter": "combat", "desc": "+15% combat rewards" },
+      { "type": "suppressionResist", "value": 0.15, "desc": "Ward arrays: +15% suppression resistance" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 8
+  },
+  {
+    "cls": "Ghost Operative",
+    "adj": ["Null-Sig","Dark-Rated","Off-Register","Unlisted","Untracked","Classified"],
+    "givenNames": ["?","Unknown","Filed","Redacted","N/A","Pending","Blank","None","Cleared","Open"],
+    "surnames": ["Record","File","Entry","Log","Archive","Register","Index","Reference","Dossier","Case"],
+    "hireCostMult": 2.2,
+    "stats": { "str": [6,11], "end": [8,13], "lead": [5,9], "cun": [14,20] },
+    "magic": 2,
+    "desc": "Classified-clearance operative. Navigates warded facilities and monitored networks. No official record exists.",
+    "lore": "There is no file on this person in the Accord's licensing database. The field where their record should be is empty. Not redacted — empty. This is either a very impressive forgery or something more unsettling.",
+    "bonuses": [
+      { "type": "rewardMult",   "value": 0.25, "categoryFilter": "intelligence", "desc": "+25% intelligence contract rewards" },
+      { "type": "durationMult", "value": -0.15, "categoryFilter": "intelligence", "desc": "-15% intelligence contract duration" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 6
+  },
+  {
+    "cls": "Operations Sergeant",
+    "adj": ["Veteran","Senior","Certified","Experienced","Rated","Proven"],
+    "givenNames": ["Brek","Jorun","Tovar","Seff","Maris","Cade","Finn","Dekel","Breck","Joal","Orla","Soli"],
+    "surnames": ["Voss","Holt","Bann","Orin","Falk","Creel","Selwyn","Dray","Mourne","Tarren"],
+    "hireCostMult": 1.5,
+    "stats": { "str": [8,13], "end": [9,14], "lead": [9,15], "cun": [7,12] },
+    "magic": 0,
+    "desc": "Senior operational NCO. Boosts all contract payout through professional coordination.",
+    "lore": "Ran a sixty-person unit before the budget restructure ended the contract. Has not forgiven the accountant. Or the ministry. Or the process.",
+    "bonuses": [
+      { "type": "rewardMult", "value": 0.12, "desc": "+12% all contract rewards" }
+    ],
+    "rarity": "uncommon",
+    "rarityWeight": 30
+  },
+  {
+    "cls": "Accord Mediator",
+    "adj": ["Treaty-Rated","Certified","Licensed","Accord-Cleared","Bonded","Charter-Holding"],
+    "givenNames": ["Saren","Velle","Coryn","Mira","Jorath","Serath","Aldric","Lyra","Kael","Enne","Quill","Orla"],
+    "surnames": ["Ashveil","Pale","Verne","Goldmark","Crael","Orin","Ironwood","Duskfen","Stoneward","Tarren"],
+    "hireCostMult": 2.0,
+    "stats": { "str": [4,8], "end": [6,10], "lead": [12,18], "cun": [10,16] },
+    "magic": 2,
+    "desc": "Licensed Accord mediator and contract specialist. Unlocks political and treaty-tier operations.",
+    "lore": "Part contract lawyer, part field diplomat, part licensed reality-binder. Their words are legally binding in Accord-signatory jurisdictions. Every sentence is billed at a rate that makes most people wince.",
+    "bonuses": [
+      { "type": "rewardMult",   "value": 0.20, "categoryFilter": "political",     "desc": "+20% political contract rewards" },
+      { "type": "rewardMult",   "value": 0.15, "categoryFilter": "intelligence",  "desc": "+15% intelligence contract rewards" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 7
+  },
+  {
+    "cls": "Combat Mage",
+    "adj": ["High-Output","Accord-Rated","Overclocked","Field-Certified","Wide-Band","Full-Spectrum"],
+    "givenNames": ["Serath","Vellen","Aldric","Kael","Mira","Jorath","Coryn","Thane","Saren","Lyra","Enne","Voss"],
+    "surnames": ["Pale","Ironwood","Duskfen","Ashveil","Verne","Goldmark","Crael","Orin","Stoneward","Tarren"],
+    "hireCostMult": 2.8,
+    "stats": { "str": [5,10], "end": [7,12], "lead": [7,12], "cun": [10,16] },
+    "magic": 5,
+    "desc": "High-output arcane specialist. Wide mana-bandwidth. Makes large problems smaller very quickly.",
+    "lore": "Failed the Institute's licensing examination three times — not on theory, which was exceptional, but on the practical assessments that measure restraint. Eventually stopped trying to pass those sections and started applying the theory directly. The restraint remains optional.",
+    "bonuses": [
+      { "type": "rewardMult", "value": 0.20, "categoryFilter": "arcane",  "desc": "+20% arcane contract rewards" },
+      { "type": "rewardMult", "value": 0.12, "categoryFilter": "combat",  "desc": "+12% combat contract rewards" },
+      { "type": "magicBonus", "value": 3,                                  "desc": "+3 company arcane rating" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 5
+  },
+  {
+    "cls": "Recovery Cleric",
+    "adj": ["Channel-Stable","Accord-Ordained","Field-Consecrated","Active-Channel","Bonded-Divine","Responsive"],
+    "givenNames": ["Mira","Saren","Jorath","Velle","Coryn","Serath","Aldric","Lyra","Kael","Enne","Orla","Soli"],
+    "surnames": ["Pale","Verne","Ashveil","Goldmark","Orin","Ironwood","Crael","Duskfen","Stoneward","Tarren"],
+    "hireCostMult": 2.3,
+    "stats": { "str": [5,10], "end": [9,15], "lead": [8,13], "cun": [8,14] },
+    "magic": 4,
+    "desc": "Ordained channel-operative. Maintains unit effectiveness through sustained field recovery workings.",
+    "lore": "Ordained by a divine entity that does not appear in the Accord's licensed deities register. The channel is verified genuine. Their god is actively responding to workings. Nobody in the licensing bureau knows what to do about the paperwork gap.",
+    "bonuses": [
+      { "type": "hpRegen",      "value": 0.015, "desc": "Divine recovery channel: +1.5% daily HP regen" },
+      { "type": "hpRegenBonus", "value": 0.010, "desc": "Field consecration: +1.0% HP regen bonus" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 6
+  },
+  {
+    "cls": "Field Medic",
+    "adj": ["Certified","Triage-Rated","Combat-Trained","Quick-Stitch","Mana-Stabilised","Experienced"],
+    "givenNames": ["Jorun","Seff","Maris","Bren","Toven","Cade","Finn","Soli","Orla","Dekel","Breck","Joal"],
+    "surnames": ["Holt","Creel","Orin","Falk","Bann","Dray","Selwyn","Mourne","Voss","Tarren"],
+    "hireCostMult": 1.6,
+    "stats": { "str": [5,9], "end": [9,14], "lead": [6,10], "cun": [9,14] },
+    "magic": 1,
+    "desc": "Combat medic with mana-assisted field recovery. Keeps personnel operational between contracts.",
+    "lore": "Three active campaigns and one outbreak response. Has seen sufficient incident variety to stop flinching at most categories of damage. The absence of flinching is apparently more reassuring to field personnel than any number of qualifications.",
+    "bonuses": [
+      { "type": "hpRegen",     "value": 0.020, "desc": "Field medical workings: +2% daily HP regen" },
+      { "type": "hpRegenBonus","value": 0.005, "desc": "Mana-assisted triage: +0.5% additional regen" }
+    ],
+    "rarity": "uncommon",
+    "rarityWeight": 28
+  },
+  {
+    "cls": "Intel Specialist",
+    "adj": ["Dark-Rated","Cleared","Classified","Cipher-Trained","Off-Record","Network-Embedded"],
+    "givenNames": ["Selk","Vira","Quill","Enne","Breck","Soli","Finn","Cade","Maris","Jorun","Bren","Orla"],
+    "surnames": ["Mourne","Falk","Creel","Dray","Selwyn","Holt","Orin","Bann","Tarren","Voss"],
+    "hireCostMult": 2.0,
+    "stats": { "str": [4,8], "end": [6,10], "lead": [8,13], "cun": [14,20] },
+    "magic": 2,
+    "desc": "Intelligence and counter-intelligence operative. Dramatically reduces nation threat accumulation.",
+    "lore": "You do not know their real name. They may not remember it either. Their references are impeccable — from sources you cannot verify, which is itself a form of verification.",
+    "bonuses": [
+      { "type": "nationThreatMult", "value": -0.20, "desc": "Counter-intel network: -20% nation threat" },
+      { "type": "rewardMult",       "value":  0.20, "categoryFilter": "intelligence", "desc": "+20% intelligence rewards" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 8
+  },
+  {
+    "cls": "Mana-Engineer",
+    "adj": ["Systems-Rated","Arc-Certified","Grid-Trained","Ordnance-Cleared","Licensed","Technical"],
+    "givenNames": ["Toven","Joal","Breck","Seff","Dekel","Cade","Maris","Finn","Bren","Jorun","Orla","Soli"],
+    "surnames": ["Holt","Bann","Orin","Creel","Falk","Dray","Selwyn","Voss","Mourne","Tarren"],
+    "hireCostMult": 1.8,
+    "stats": { "str": [7,12], "end": [8,13], "lead": [5,9], "cun": [10,16] },
+    "magic": 1,
+    "desc": "Field mana-systems engineer. Enables and accelerates large-scale operations. Improves fort mana-infrastructure.",
+    "lore": "Has designed three categories of mana-ordnance that have since been banned under separate Accord treaties. None of the bans name them specifically. This is a point of quiet professional pride.",
+    "bonuses": [
+      { "type": "durationMult", "value": -0.12, "categoryFilter": "siege",  "desc": "-12% siege contract duration" },
+      { "type": "rewardMult",   "value":  0.12, "categoryFilter": "siege",  "desc": "+12% siege contract rewards" },
+      { "type": "rosterSlots",  "value":  1,                                 "desc": "+1 roster slot (engineering support)" }
+    ],
+    "rarity": "uncommon",
+    "rarityWeight": 25
+  },
+  {
+    "cls": "Command Operative",
+    "adj": ["Oath-Bound","Accord-Senior","Command-Rated","Strategic-Cleared","Executive","Field-Director"],
+    "givenNames": ["Aldric","Coryn","Serath","Vellen","Jorath","Kael","Thane","Mira","Saren","Lyra","Enne","Voss"],
+    "surnames": ["Ironwood","Goldmark","Ashveil","Duskfen","Pale","Verne","Stoneward","Crael","Orin","Tarren"],
+    "hireCostMult": 3.2,
+    "stats": { "str": [8,13], "end": [9,14], "lead": [15,22], "cun": [12,18] },
+    "magic": 1,
+    "desc": "Senior command operative. Elite leadership profile. Dramatic company-wide operational boost.",
+    "lore": "Made an oath at twenty-two and has held it for thirty years. The oath was to serve whoever demonstrated they were worth the commitment. They are still waiting for the employer who fully earns it. They are watching the Iron Company carefully.",
+    "bonuses": [
+      { "type": "rewardMult",       "value": 0.15, "desc": "+15% all contract rewards" },
+      { "type": "commanderStatBonus","value": 2,   "desc": "+2 to all commander stat checks" },
+      { "type": "activeJobCap",     "value": 1,    "desc": "+1 simultaneous contract capacity" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 4
+  },
+  {
+    "cls": "Shadow Operative",
+    "adj": ["Off-Books","Dark-Certified","Null-Sig","Unlisted","Deniable","Black-Rated"],
+    "givenNames": ["?","Unknown","N/A","Redacted","Filed","Pending","Blank","Cleared","Open","None","Entry","Case"],
+    "surnames": ["Record","File","Dossier","Log","Archive","Register","Index","Reference","Case","Entry"],
+    "hireCostMult": 3.0,
+    "stats": { "str": [6,11], "end": [8,13], "lead": [9,14], "cun": [16,22] },
+    "magic": 3,
+    "desc": "Highest-tier deniable operative. Maximum intelligence and suppression effectiveness. Mana-sig redacted at source.",
+    "lore": "No licensing record. No Accord registration. No personnel file in any searchable database. Their mana-signature is actively suppressed. They operate in a regulatory category that does not officially exist.",
+    "bonuses": [
+      { "type": "nationThreatMult", "value": -0.25, "desc": "Active mana-suppression: -25% nation threat" },
+      { "type": "rewardMult",       "value":  0.25, "categoryFilter": "intelligence", "desc": "+25% intelligence rewards" },
+      { "type": "suppressionResist","value":  0.20, "desc": "+20% suppression resistance" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 3
+  },
+  {
+    "cls": "Embedded Correspondent",
+    "adj": ["Media-Cleared","Press-Rated","Narrative-Certified","Broadcast-Licensed","On-Record","Published"],
+    "givenNames": ["Lyra","Velle","Saren","Mira","Quill","Enne","Orla","Soli","Bren","Finn","Cade","Jorun"],
+    "surnames": ["Pale","Verne","Ashveil","Goldmark","Crael","Orin","Mourne","Falk","Tarren","Selwyn"],
+    "hireCostMult": 1.7,
+    "stats": { "str": [3,7], "end": [6,10], "lead": [9,14], "cun": [13,19] },
+    "magic": 0,
+    "desc": "Licensed media correspondent. Controls the public narrative. Dramatically amplifies fame and reduces political threat.",
+    "lore": "Has been formally barred from four states and two Accord member cities. Has embedded with PMCs, trade unions, and at least one organisation whose name cannot be printed. The footage from that last assignment remains under injunction in three jurisdictions.",
+    "bonuses": [
+      { "type": "fameMult",         "value": 0.30, "desc": "+30% fame from all contracts" },
+      { "type": "nationThreatMult", "value": -0.12, "desc": "Narrative management: -12% nation threat" }
+    ],
+    "rarity": "uncommon",
+    "rarityWeight": 22
+  },
+  {
+    "cls": "Field Director",
+    "adj": ["Strategic","Executive","High-Command","Operational","Senior-Rated","Director-Grade"],
+    "givenNames": ["Aldric","Serath","Vellen","Coryn","Thane","Jorath","Kael","Mira","Saren","Enne","Voss","Lyra"],
+    "surnames": ["Ironwood","Ashveil","Goldmark","Duskfen","Pale","Stoneward","Verne","Crael","Orin","Tarren"],
+    "hireCostMult": 3.5,
+    "stats": { "str": [7,12], "end": [8,13], "lead": [16,24], "cun": [13,19] },
+    "magic": 1,
+    "desc": "Strategic command director. Expands contract capacity and boosts all military operations.",
+    "lore": "Commanded a combined division. Lost it to the politics of the peace settlement rather than any battlefield failure. Has not forgiven the process. Is channelling the grievance productively.",
+    "bonuses": [
+      { "type": "rewardMult",   "value": 0.15, "categoryFilter": "combat",   "desc": "+15% combat rewards" },
+      { "type": "rewardMult",   "value": 0.15, "categoryFilter": "siege",    "desc": "+15% siege rewards" },
+      { "type": "activeJobCap", "value": 2,                                   "desc": "+2 simultaneous contract capacity" }
+    ],
+    "rarity": "rare",
+    "rarityWeight": 4
+  }
+]

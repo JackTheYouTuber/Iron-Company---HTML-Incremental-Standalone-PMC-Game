@@ -1,0 +1,453 @@
+[
+  {
+    "id": "barracks",
+    "category": "infrastructure",
+    "name": "Refurbish the Barracks Block",
+    "desc": "The barracks are structurally sound but undersized for a growing operation. Strip out the temporary partitions, run new mana-conduit for environmental regulation, and bunk another six personnel.",
+    "effect": "+3 roster slots",
+    "flavour": "Six more beds. Six more contractors on the payroll. The fort starts to feel like an organisation.",
+    "cost": 300,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "rosterSlots",
+        "value": 3
+      }
+    ]
+  },
+  {
+    "id": "smithy",
+    "category": "economy",
+    "name": "Reactivate the Fabrication Shop",
+    "desc": "The forge and mana-lathe are still serviceable under the rust. Clean the equipment, restore the mana-feed line, and the company's gear stays field-rated. Clients notice when your equipment is maintained.",
+    "effect": "+10% all contract rewards",
+    "flavour": "Field-rated gear at all times. The margin difference is measurable.",
+    "cost": 400,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "rewardMult",
+        "value": 0.1
+      }
+    ]
+  },
+  {
+    "id": "watchtower",
+    "category": "military",
+    "name": "Restore the Observation Tower",
+    "desc": "Wire the tower with a mana-resonance scanner and a comms relay. Advance threat assessment means the company deploys faster \u2014 you know what you are walking into before the brief.",
+    "effect": "-15% contract durations",
+    "flavour": "Forewarned is profitable. Unforewarned is expensive.",
+    "cost": 500,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "durationMult",
+        "value": -0.15
+      }
+    ]
+  },
+  {
+    "id": "infirmary",
+    "category": "welfare",
+    "name": "Commission the Medical Bay",
+    "desc": "Proper triage equipment, a mana-stabilisation field, a licensed recovery-working station, and a medic who knows which end of a resonance scanner matters. Keeps the commanding officer operational between deployments.",
+    "effect": "Commander HP regenerates each day",
+    "flavour": "An operational commander is worth more than an expensive memorial.",
+    "cost": 600,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "hpRegen",
+        "value": 0.04
+      }
+    ]
+  },
+  {
+    "id": "great_hall",
+    "category": "reputation",
+    "name": "Commission the Operations Hall",
+    "desc": "Gut the old great hall, install proper briefing infrastructure, a contractor lounge, and a reputation board visible to incoming recruits. Word travels. The quality of recruits who respond to that word improves.",
+    "effect": "+20% fame gain; unlocks rare recruits",
+    "flavour": "The calibre of people who answer your posting has changed. They are reading your operation history before they arrive.",
+    "cost": 800,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "fameMult",
+        "value": 0.2
+      },
+      {
+        "type": "unlockRareRecruits",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": "treasury",
+    "category": "economy",
+    "name": "Establish the Secure Vault",
+    "desc": "Mana-locked vault with biometric keying and a monitored transfer ledger. Your mana-credit holdings are secure. Clients who can see you are financially stable pay better.",
+    "effect": "+20% all contract rewards",
+    "flavour": "Financial credibility is a force multiplier.",
+    "cost": 900,
+    "requiresUpgrade": "smithy",
+    "effects": [
+      {
+        "type": "rewardMult",
+        "value": 0.2
+      }
+    ]
+  },
+  {
+    "id": "armoury",
+    "category": "military",
+    "name": "Stock the Equipment Depot",
+    "desc": "Full equipment certification, load-out standardisation, and a maintained gear pool. Every contractor arrives at brief properly equipped. The commanding officer's gear is always mission-ready.",
+    "effect": "+2 to all commander stat checks",
+    "flavour": "Calibrated equipment is the difference between a field rating and a liability.",
+    "cost": 700,
+    "requiresUpgrade": "smithy",
+    "effects": [
+      {
+        "type": "commanderStatBonus",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "stables",
+    "category": "infrastructure",
+    "name": "Upgrade the Vehicle Bay",
+    "desc": "Expand the vehicle pool with mana-cell charging infrastructure and two additional ground units. Faster deployment means more contracts completed per cycle. Personnel stop arriving at operational briefs mud-covered and late.",
+    "effect": "-10% additional duration on all contracts",
+    "flavour": "Deployment time is overhead. Reduce overhead.",
+    "cost": 550,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "durationMult",
+        "value": -0.1
+      }
+    ]
+  },
+  {
+    "id": "ritual_circle",
+    "category": "arcane",
+    "name": "Commission the Arcane Array",
+    "desc": "The fort's undercroft sits above a natural mana-confluence point. Install a precision array, calibrate the resonance nodes, and the facility becomes a Class B arcane operations site. Clients with sensitive arcane requirements will know.",
+    "effect": "+5 company arcane rating; unlocks arcane contracts",
+    "flavour": "The ambient readings changed when the array went live. Personnel with any mana-sensitivity noticed immediately.",
+    "cost": 1200,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "magicBonus",
+        "value": 5
+      },
+      {
+        "type": "fortWarded",
+        "value": false
+      }
+    ]
+  },
+  {
+    "id": "binding_chamber",
+    "category": "arcane",
+    "name": "Construct the Containment Suite",
+    "desc": "A mana-hardened containment room rated for volatile entities, bound constructs, and unstable arcane materials. Clients who need something held securely \u2014 rather than destroyed, which is messier \u2014 will pay a significant premium.",
+    "effect": "+25% reward on arcane contracts",
+    "flavour": "The suite has seven independent locking mechanisms. Three of them are designed to operate against things that do not have hands.",
+    "cost": 1800,
+    "requiresUpgrade": "ritual_circle",
+    "effects": [
+      {
+        "type": "rewardMult",
+        "value": 0.25,
+        "categoryFilter": "arcane"
+      }
+    ]
+  },
+  {
+    "id": "ossuary",
+    "category": "arcane",
+    "name": "Establish the Archive Vault",
+    "desc": "A sanctified documentation and containment facility for recovered arcane artefacts and metaphysically sensitive materials. Proper cataloguing means recovered items are not liabilities. They are inventory.",
+    "effect": "+15% reward on dungeon contracts; enhances death-spectrum workings",
+    "flavour": "Everything in the vault is labelled, dated, and contained. The alternative was three separate incidents.",
+    "cost": 1400,
+    "requiresUpgrade": "ritual_circle",
+    "effects": [
+      {
+        "type": "rewardMult",
+        "value": 0.15,
+        "categoryFilter": "dungeon"
+      },
+      {
+        "type": "magicBonus",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "war_room",
+    "category": "military",
+    "name": "Establish the Operations Centre",
+    "desc": "Multi-screen tactical display, live mana-grid overlay, secure comms to all active units. The company can now coordinate parallel contract deployments from a single command point.",
+    "effect": "+2 simultaneous active contracts",
+    "flavour": "Every contract is won in the planning room before a single person moves.",
+    "cost": 1600,
+    "requiresUpgrade": "watchtower",
+    "effects": [
+      {
+        "type": "activeJobCap",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "id": "signal_beacons",
+    "category": "infrastructure",
+    "name": "Deploy the Relay Network",
+    "desc": "Three encrypted mana-relay stations on the surrounding ridge lines, hardened against interference. Scattered assets are recalled faster. Advance units transmit intelligence before the main team even briefs.",
+    "effect": "-20% duration on scouting and bounty contracts",
+    "flavour": "Real-time comms change every operational calculation.",
+    "cost": 750,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "durationMult",
+        "value": -0.2,
+        "categoryFilter": "scouting"
+      },
+      {
+        "type": "durationMult",
+        "value": -0.2,
+        "categoryFilter": "bounty"
+      }
+    ]
+  },
+  {
+    "id": "reliquary",
+    "category": "arcane",
+    "name": "Install the Specimen Repository",
+    "desc": "Classified arcane artefact storage rated for hazardous-category materials. Recovered items from arcane and deep-site contracts are catalogued, contained, and available for analysis. The XP from handling such materials is not trivial.",
+    "effect": "+15% XP from arcane and dungeon contracts",
+    "flavour": "Half of it is unclassified. Half is classified but readable. The last section has a lock and a notation that simply says 'not yet'.",
+    "cost": 1300,
+    "requiresUpgrade": "ossuary",
+    "effects": [
+      {
+        "type": "xpMult",
+        "value": 0.15,
+        "categoryFilter": "arcane"
+      },
+      {
+        "type": "xpMult",
+        "value": 0.15,
+        "categoryFilter": "dungeon"
+      }
+    ]
+  },
+  {
+    "id": "leyline_tap",
+    "category": "arcane",
+    "name": "Install the Mana-Tap Array",
+    "desc": "The mana-confluence beneath the fort runs at depth. A precision extraction array draws ambient mana directly into the facility's grid, flooding every working station with supplementary mana-flow. Arcane output across the company doubles.",
+    "effect": "Doubles all arcane bonuses; +10% fame from arcane contracts",
+    "flavour": "The diagnostic readout after installation was so anomalous the technician ran it three times. Then accepted the result.",
+    "cost": 3500,
+    "requiresUpgrade": "ritual_circle",
+    "effects": [
+      {
+        "type": "magicMultiplier",
+        "value": 1.0
+      },
+      {
+        "type": "fameMult",
+        "value": 0.1,
+        "categoryFilter": "arcane"
+      }
+    ]
+  },
+  {
+    "id": "runic_gate",
+    "category": "arcane",
+    "name": "Install the Ward-Gate System",
+    "desc": "The fort's access points are fitted with full-spectrum mana-monitoring arrays, entity-repulsion fields, and a resonance signature that registers on every arcane-monitoring network in the region. The facility is now unmistakably classified as a mana-active site.",
+    "effect": "Fort fully warded; unlocks the highest tier arcane contracts",
+    "flavour": "The gate does not just keep things out. It tells the things what they are dealing with before they decide to try.",
+    "cost": 4500,
+    "requiresUpgrade": "leyline_tap",
+    "effects": [
+      {
+        "type": "fortWarded",
+        "value": true
+      }
+    ]
+  },
+  {
+    "id": "chapel",
+    "category": "welfare",
+    "name": "Commission the Restoration Suite",
+    "desc": "Dedicated mana-wellness and recovery facilities. Properly calibrated ambient mana-field, meditation isolation rooms, and a resonance-aligned recovery working station. Personnel recover faster. The commanding officer stops coming into briefings still carrying the last operation.",
+    "effect": "+15% HP regen; enhances channel-based workings",
+    "flavour": "Recovery is not downtime. Recovery is maintenance. Maintained assets perform better.",
+    "cost": 900,
+    "requiresUpgrade": "infirmary",
+    "effects": [
+      {
+        "type": "hpRegenMult",
+        "value": 0.15
+      },
+      {
+        "type": "magicBonus",
+        "value": 1
+      }
+    ]
+  },
+  {
+    "id": "library",
+    "category": "reputation",
+    "name": "Build the Intelligence Archive",
+    "desc": "A secure research and reference facility covering operational history, technical manuals, arcane theory, and classified contract files. Contractors who study improve faster. Recruits who join an operation with a working archive arrive better prepared.",
+    "effect": "-10% XP to level; +1 CUN to new recruits",
+    "flavour": "An organisation with institutional memory operates differently from one that relearns everything every cycle.",
+    "cost": 1100,
+    "requiresUpgrade": null,
+    "effects": [
+      {
+        "type": "xpReqMult",
+        "value": -0.1
+      },
+      {
+        "type": "recruitStatBonus",
+        "value": 1,
+        "stat": "cun"
+      }
+    ]
+  },
+  {
+    "id": "fortifications",
+    "category": "military",
+    "name": "Upgrade Perimeter Security",
+    "desc": "Hardened perimeter walls, mana-detection arrays on all approaches, reinforced access points, and overlapping fields of fire. The fort stops being a base of operations and becomes a military asset that requires a serious operation to threaten.",
+    "effect": "Enables territorial contracts; boosts suppression resistance",
+    "flavour": "A fortified position is a political statement as well as a military one.",
+    "cost": 2000,
+    "requiresUpgrade": "watchtower",
+    "effects": [
+      {
+        "type": "suppressionResist",
+        "value": 0.2
+      }
+    ]
+  },
+  {
+    "id": "intelligence_network",
+    "category": "military",
+    "name": "Build the Intelligence Network",
+    "desc": "A distributed network of contracted informants, mana-encrypted dead-drops, and a well-positioned analyst embedded in a regional authority's data division. You will know what the Accord powers are planning before they finalise the brief.",
+    "effect": "-25% nation threat accumulation",
+    "flavour": "The best response to a threat is reading it three weeks before it is filed.",
+    "cost": 2500,
+    "requiresUpgrade": "war_room",
+    "effects": [
+      {
+        "type": "nationThreatMult",
+        "value": -0.25
+      }
+    ]
+  },
+  {
+    "id": "diplomatic_corps",
+    "category": "reputation",
+    "name": "Staff the Diplomatic Office",
+    "desc": "A small professional team of Accord-trained diplomats and contract negotiators who can represent the Iron Company at treaty tables, licensing hearings, and government meetings. Not every problem is a field operation.",
+    "effect": "+25% rewards on political contracts; reduces nation threat escalation",
+    "flavour": "Contracts won at a table are cheaper than contracts won in the field. Staff accordingly.",
+    "cost": 2200,
+    "requiresUpgrade": "library",
+    "effects": [
+      {
+        "type": "rewardMult",
+        "value": 0.25,
+        "categoryFilter": "political"
+      },
+      {
+        "type": "nationThreatMult",
+        "value": -0.1
+      }
+    ]
+  },
+  {
+    "id": "propaganda_office",
+    "category": "reputation",
+    "name": "Commission the Media Relations Unit",
+    "desc": "A licensed broadcast terminal, a contracted narrative specialist, and a distribution network capable of placing a press release in every major city-state feed within forty-eight hours. The Iron Company's public profile is now an asset that can be actively managed.",
+    "effect": "+30% fame from all contracts",
+    "flavour": "You are not just what you do. You are the version of what you do that reaches the public record.",
+    "cost": 2800,
+    "requiresUpgrade": "diplomatic_corps",
+    "effects": [
+      {
+        "type": "fameMult",
+        "value": 0.3
+      }
+    ]
+  },
+  {
+    "id": "command_center",
+    "category": "military",
+    "name": "Build the Strategic Command Suite",
+    "desc": "A dedicated strategic operations floor with long-range encrypted comms, an integrated mana-grid tactical display covering the full operational region, and dedicated command staff. The operations centre handles tactics. This handles strategy.",
+    "effect": "+4 simultaneous active contracts; unlocks nation-tier operations",
+    "flavour": "A commander who cannot see the full operational picture is managing chaos. This is not that.",
+    "cost": 5000,
+    "requiresUpgrade": "war_room",
+    "effects": [
+      {
+        "type": "activeJobCap",
+        "value": 4
+      }
+    ]
+  },
+  {
+    "id": "artillery_battery",
+    "category": "military",
+    "name": "Install the Mana-Artillery Platform",
+    "desc": "Long-range mana-ordnance platforms, arc-fire guidance arrays, and one prototype system the engineer insists falls within Accord treaty definitions. The fort now registers as a hardened military installation on every threat assessment in the region.",
+    "effect": "+20% rewards on combat and siege contracts; enables heavy assault operations",
+    "flavour": "The effective range at which you become a problem for someone has increased significantly.",
+    "cost": 4000,
+    "requiresUpgrade": "fortifications",
+    "effects": [
+      {
+        "type": "rewardMult",
+        "value": 0.2,
+        "categoryFilter": "combat"
+      },
+      {
+        "type": "rewardMult",
+        "value": 0.2,
+        "categoryFilter": "siege"
+      }
+    ]
+  },
+  {
+    "id": "supply_line",
+    "category": "infrastructure",
+    "name": "Establish the Secure Supply Chain",
+    "desc": "A defended and encrypted logistics corridor from the fort to two regional supply hubs. Mana-cell resupply, equipment replacement, and specialist materials arrive on schedule regardless of what the surrounding political environment is doing. The Iron Company cannot be embargoed out of operation.",
+    "effect": "Blockade immunity; supply independence from all economic suppression",
+    "flavour": "A properly logistics-secured operation is significantly harder to strangle.",
+    "cost": 3200,
+    "requiresUpgrade": "stables",
+    "effects": [
+      {
+        "type": "blockadeImmunity",
+        "value": true
+      }
+    ]
+  }
+]

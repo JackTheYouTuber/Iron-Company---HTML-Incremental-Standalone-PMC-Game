@@ -1,0 +1,30 @@
+/* ===================== SAVES TAB ===================== */
+.save-card {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:10px 12px; margin-bottom:8px;
+}
+.save-name    { font-family:var(--font-ui); font-size:0.9rem; color:var(--gold2); }
+.save-preview { font-style:italic; font-size:0.75rem; color:var(--text2); margin-top:2px; }
+.save-btn {
+    padding:3px 10px; font-family:var(--font-ui); font-size:0.7rem;
+    cursor:pointer; border:1px solid var(--border); background:rgba(0,0,0,0.3); color:var(--text);
+    letter-spacing:1px; transition:background 0.15s, border-color 0.15s;
+}
+.save-btn:hover { background:rgba(90,60,10,0.3); border-color:var(--gold); }
+.load-btn { color:var(--gold2); border-color:var(--border2); }
+.del-btn  { color:#a04030; }
+
+.save-input-row { display:flex; gap:6px; margin-bottom:12px; }
+.save-input-row input {
+    flex:1; background:rgba(0,0,0,0.35); border:1px solid var(--border);
+    color:var(--text); font-family:var(--font-body); font-size:0.82rem;
+    padding:5px 9px; outline:none;
+}
+.save-input-row input:focus { border-color:var(--gold2); }
+.save-input-row input::placeholder { color:var(--text2); font-style:italic; }
+.save-input-row button {
+    padding:5px 14px; font-family:var(--font-ui); font-size:0.72rem;
+    letter-spacing:2px; background:rgba(90,60,10,0.3); border:1px solid var(--border2);
+    color:var(--gold2); cursor:pointer; transition:background 0.15s;
+}
+.save-input-row button:hover { background:rgba(90,60,10,0.5); }

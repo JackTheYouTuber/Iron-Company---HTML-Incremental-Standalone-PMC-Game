@@ -1,0 +1,10 @@
+[
+  { "threshold": 0,    "label": "Off the Grid",        "rank": 0 },
+  { "threshold": 50,   "label": "Word on the Street",  "rank": 1 },
+  { "threshold": 150,  "label": "Known Quantity",       "rank": 2 },
+  { "threshold": 300,  "label": "Credible Threat",      "rank": 3 },
+  { "threshold": 500,  "label": "Regional Name",        "rank": 4 },
+  { "threshold": 800,  "label": "Feared Contractor",    "rank": 5 },
+  { "threshold": 1200, "label": "Strategic Asset",      "rank": 6 },
+  { "threshold": 2000, "label": "Continental Legend",   "rank": 7 }
+]

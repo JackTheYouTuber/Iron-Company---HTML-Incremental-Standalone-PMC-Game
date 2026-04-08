@@ -1,0 +1,36 @@
+/* ===================== ARCANE / MAGIC ===================== */
+.magic-tag {
+    display: inline-block; padding: 1px 6px;
+    font-size: 0.62rem; font-family: var(--font-ui);
+    background: rgba(120, 60, 180, 0.18); border: 1px solid #6a3090;
+    color: #b070e0; margin-left: 4px; vertical-align: middle;
+}
+
+.danger-arcane { color: #a060d0; }
+
+/* Job card arcane category accent */
+.job-card.arcane-job { border-left: 3px solid rgba(120, 60, 180, 0.5); }
+.job-card.arcane-job:not(.disabled):not(.in-progress):hover {
+    border-color: #a060d0;
+    background: #160e20;
+}
+
+/* Lore text in cards */
+.lore-text {
+    font-size: 0.68rem; color: var(--text2); opacity: 0.55;
+    font-style: italic; margin-bottom: 4px;
+    border-left: 2px solid var(--border); padding-left: 6px;
+    line-height: 1.4;
+}
+
+/* Magic stat display */
+.stat-magic { color: #a060d0; }
+
+/* Warded fort indicator */
+.fort-warded-badge {
+    display: inline-block; padding: 2px 8px;
+    font-size: 0.65rem; font-family: var(--font-ui);
+    background: rgba(120, 60, 180, 0.15); border: 1px solid #6a3090;
+    color: #b070e0; letter-spacing: 2px;
+    margin-bottom: 8px;
+}

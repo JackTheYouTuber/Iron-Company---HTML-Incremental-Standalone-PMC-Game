@@ -1,0 +1,9 @@
+[
+  { "minLevel": 1,  "title": "Unlicensed Operator" },
+  { "minLevel": 2,  "title": "Field-Rated Contractor" },
+  { "minLevel": 3,  "title": "Certified Company Lead" },
+  { "minLevel": 4,  "title": "Combat Operations Director" },
+  { "minLevel": 5,  "title": "Sovereign Contractor" },
+  { "minLevel": 7,  "title": "Iron Commander" },
+  { "minLevel": 10, "title": "Undying Accord" }
+]

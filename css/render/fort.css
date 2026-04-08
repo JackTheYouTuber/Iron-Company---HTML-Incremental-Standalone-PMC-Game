@@ -1,0 +1,22 @@
+/* ===================== UPGRADE CARDS ===================== */
+.upgrade-card {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:10px 12px; margin-bottom:8px;
+    cursor:pointer; transition:border-color 0.15s;
+}
+.upgrade-card:hover:not(.disabled):not(.bought) { border-color:var(--gold); background:#1e1608; }
+.upgrade-card.disabled { opacity:0.45; cursor:not-allowed; }
+.upgrade-card.bought   { border-color:var(--green2); opacity:0.65; cursor:default; }
+.upgrade-name    { font-family:var(--font-ui); font-size:0.88rem; color:var(--gold2); margin-bottom:2px; }
+.upgrade-desc    { font-style:italic; font-size:0.77rem; line-height:1.5; color:var(--text2); margin-bottom:3px; }
+.upgrade-flavour { font-size:0.68rem; color:var(--text2); opacity:0.55; margin-bottom:4px; font-style:italic; }
+.upgrade-effect  { font-size:0.73rem; color:var(--green2); }
+.upgrade-cost    { color:var(--gold); font-size:0.78rem; font-family:var(--font-ui); }
+
+/* Fort upgrade category badges */
+.upgrade-category-arcane       { color: #b070e0; }
+.upgrade-category-economy      { color: var(--gold); }
+.upgrade-category-military     { color: #c06030; }
+.upgrade-category-welfare      { color: var(--green2); }
+.upgrade-category-infrastructure { color: var(--text2); }
+.upgrade-category-reputation   { color: #6080cc; }

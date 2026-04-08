@@ -1,0 +1,47 @@
+/* ===================== NAME INPUT ===================== */
+
+/* Legacy single-input row */
+.name-input-row { margin-bottom:18px; }
+.name-input-label {
+    font-family:var(--font-ui); font-size:0.72rem;
+    letter-spacing:3px; color:var(--text2); display:block; margin-bottom:5px;
+}
+.name-input-row input {
+    width:100%; background:rgba(0,0,0,0.4); border:1px solid var(--border2);
+    color:var(--text); font-family:var(--font-ui); font-size:1rem;
+    padding:8px 12px; outline:none; letter-spacing:1px;
+}
+.name-input-row input:focus { border-color:var(--gold2); }
+.name-input-row input::placeholder { color:var(--text2); font-style:italic; font-size:0.85rem; }
+
+/* Updated name row with inline random button */
+.name-input-group {
+    display: flex; gap: 8px; align-items: stretch;
+}
+.name-input-group input {
+    flex: 1; background: rgba(0,0,0,0.4); border: 1px solid var(--border2);
+    color: var(--text); font-family: var(--font-ui); font-size: 1rem;
+    padding: 8px 12px; outline: none; letter-spacing: 1px;
+}
+.name-input-group input:focus { border-color: var(--gold2); }
+.name-input-group input::placeholder { color: var(--text2); font-style: italic; font-size: 0.85rem; }
+.name-input-group input.flash { border-color: var(--gold2); background: rgba(200,140,30,0.07); }
+
+.name-random-btn {
+    background: rgba(90,60,10,0.3); border: 1px solid var(--border);
+    color: var(--text2); font-family: var(--font-ui); font-size: 0.8rem;
+    padding: 6px 12px; cursor: pointer; white-space: nowrap; letter-spacing: 1px;
+    transition: border-color 0.15s, color 0.15s;
+}
+.name-random-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Section label inside char creation */
+.cc-section-label {
+    font-family: var(--font-ui);
+    font-size: 0.7rem; letter-spacing: 3px; color: var(--text2);
+    margin: 14px 0 4px;
+}
+.cc-hint {
+    font-size: 0.72rem; color: var(--text2); font-style: italic;
+    margin-bottom: 10px; opacity: 0.75;
+}

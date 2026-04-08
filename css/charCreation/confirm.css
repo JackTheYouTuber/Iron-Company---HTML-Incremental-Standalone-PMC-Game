@@ -1,0 +1,14 @@
+/* ===================== STAT PREVIEW ===================== */
+.stat-preview-box {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:12px; margin-bottom:4px;
+}
+.stat-preview-title {
+    font-family:var(--font-ui); font-size:0.7rem;
+    letter-spacing:3px; color:var(--text2); margin-bottom:10px;
+}
+#stat-preview { display:flex; gap:16px; flex-wrap:wrap; }
+.preview-stat       { display:flex; flex-direction:column; align-items:center; gap:2px; }
+.preview-stat-label { font-size:0.65rem; color:var(--text2); font-style:italic; }
+.preview-stat-val   { font-family:var(--font-ui); font-size:1.1rem; color:var(--gold2); }
+.preview-bonus      { color: var(--green2); font-size: 0.72rem; }

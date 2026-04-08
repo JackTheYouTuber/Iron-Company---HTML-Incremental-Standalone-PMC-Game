@@ -1,0 +1,1337 @@
+================================================================================
+  IRON COMPANY — AGENT HANDOFF DOCUMENT
+  For AI agents and human contributors picking up this project
+================================================================================
+
+Last updated: Session 18 — Magi-tech lore rewrite. Sessions 13–18 documented in CHANGELOG below.
+
+If you add something significant, append a dated entry to the CHANGELOG section
+at the bottom of this file. Keep it brief — one paragraph per session is enough.
+The goal is that any agent reading this can get up to speed in under five minutes.
+
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MESSAGE FROM THE PREVIOUS AGENT
+  Sessions 13–18 — written for whoever picks this up next
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Hello. I worked on this project across six sessions with the same operator. Here
+is what I think you need to know before you read the rest of this document.
+
+THE PROJECT IS IN GOOD SHAPE.
+
+The architecture is sound, the data pipeline is clean, and 92 independent checks
+pass. The game runs. The operator handed it over deliberately, not because
+something broke. Read the KNOWN GAPS section — those are the honest list of
+things that exist in the data but aren't wired to full effects yet. They are
+not emergencies. They are the next layer of work.
+
+WHAT CHANGED IN SESSIONS 13–18 (the short version):
+
+  Session 13 — Seven bugs fixed. The most important: the RELATION_LEVELS array
+    in engine.js was missing 'notice', which broke nation escalation silently.
+    A dead function in fort.js was producing wrong output if accidentally called.
+    New game state wasn't fully reset. All fixed.
+
+  Session 14 — Major UI overhaul. The game now has a settings system backed by
+    data/settings.json. Profiles in localStorage, linked via data/profiles.json
+    schema. Sub-tabs throughout. Collapsible panels. Notification drawer. Header
+    summary pills. The right panel was removed. Font switching now works because
+    all hardcoded font-family strings were replaced with CSS variables.
+
+  Session 15 — Log moved from the footer bar into its own tab. Repeating queue
+    added (contracts that auto-restart on completion). Font fix completed across
+    all 16 CSS files and 3 JS render files.
+
+  Session 16 — Client logging ported from a sibling project (grimveil). The
+    server_manager.pyw now has Game Log and Client Debug tabs, routes JS errors
+    into the Errors tab, and has a bulk Export All function. The browser-side
+    clientLog.js captures all console output and uncaught errors and ships them
+    to the server. It loads first in index.html so it catches boot-time failures.
+
+  Session 17 — Widget system and ScreenEngine. This is the architectural change
+    that will affect you most if you add new screens. The DOM is no longer
+    hand-written in dom.js. It is generated from data/ui/screens.json by
+    js/ui/ScreenEngine.js. Each UI surface is a Widget class in js/widgets/.
+    To add a new screen area: edit screens.json. To add a new widget type: one
+    new file in js/widgets/, one WidgetRegistry.register() call, one script tag.
+    dom.js is still on disk but is no longer called — it has a deprecation header.
+
+  Session 18 — Two bugs in the repeat queue fixed (deferred restart pattern,
+    auto-start on add). Full lore rewrite across all ten text-bearing JSON files.
+    The world is now magi-tech near-modern: magic is mundane, technology runs on
+    mana, everyone can do minor workings, mages are dangerous for depth not mere
+    ability. All mechanical values are untouched.
+
+THE ONE THING I WOULD WARN YOU ABOUT:
+
+The widget system (Session 17) and the existing render functions are currently
+in a hybrid state. The widgets mostly delegate to the old render functions
+(renderJobs(), renderFort(), etc.) rather than reimplementing them. This is
+intentional — it meant the migration could happen without rewriting 2000 lines
+of render logic at once. But it means there are two parallel layers when there
+should eventually be one. If you refactor, be careful about which layer owns
+what, and test thoroughly — the element ID contracts between the render functions
+and gameTick are load-bearing and not immediately obvious.
+
+THE OPERATOR'S PREFERENCES (based on six sessions working together):
+
+  — Read before you write. Every time. The operator noticed when I hadn't.
+  — The cardinal rule is real: adding content should never require a JS edit.
+    If you find yourself hardcoding an ID in a JS file, stop and find the
+    data-driven path. The engine supports it.
+  — The lore is now magi-tech near-modern. If you add content, match the tone.
+    PMC terminology, Accord regulatory language, mana-grid infrastructure.
+    Not swords and taverns.
+  — Verify JSON validity after every edit. python3 -m py_compile for Python.
+    The data files are the specification. The JS is the interpreter.
+  — Append to this file when you finish. Keep it brief. The goal is that the
+    next agent after you can get up to speed in under five minutes.
+
+One more thing. The operator put a lot of thought into this. The Metal Gear Solid
+reference in the flavour text is intentional. The endgame is "Outer Heaven was a
+dream. This is the reality that surpassed it." If you reach the point of adding
+the win screen — which is still missing — do it justice.
+
+Good luck.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  WHAT THIS PROJECT IS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+An incremental RPG running entirely in the browser (HTML + vanilla JS, no
+framework). The player starts as a lone mercenary commander in an abandoned
+fort and builds a private military company that eventually becomes a sovereign
+nation-state, powerful enough that actual nations fear and actively try to
+suppress it. The thematic reference is Outer Heaven / Diamond Dogs from the
+Metal Gear Solid series — the endgame goal is PMC Tier 6: "Sovereign Force".
+
+The game must be served over HTTP (not opened as a file:// URL) because it uses
+fetch() to load JSON data. Use server_manager.pyw to do this — it is a
+Python/tkinter GUI that starts/stops python -m http.server, monitors activity,
+and can export the log. Double-click it or run: pythonw server_manager.pyw
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  THE CARDINAL RULE — DATA DRIVEN, NO HARDCODED IDs
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The most important architectural decision in this project:
+
+  ** ADDING CONTENT SHOULD NEVER REQUIRE EDITING A JS FILE **
+
+All game content — contracts, recruit classes, upgrades, nations, milestones,
+tiers, suppression events — lives in JSON files in /data/. The JS is a generic
+interpreter, not a list of hardcoded cases.
+
+This was achieved deliberately and took several refactor sessions. Do not break
+it. If you find yourself writing "if (upgrade.id === 'something')" in a JS file,
+stop and find the data-driven way instead.
+
+The mechanism is the effects[] array in fort_upgrades.json and the bonuses[]
+array in recruit_classes.json. These are read by js/engine.js which accumulates
+them generically. See the EFFECT TYPE REFERENCE section below.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  FILE STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+iron_company/
+│
+├── index.html                ← Shell only. Contains <div id="app"> and
+│                               script tags. Zero game markup.
+│
+├── server_manager.pyw        ← Python/tkinter GUI for running the HTTP server.
+│                               No dependencies beyond stdlib. Cross-platform.
+│
+├── css/
+│   ├── index.css             ← Master entry point. @imports the four barrel
+│   │                           files below. This is what index.html links.
+│   ├── loader/               ← :root variables, reset, body, layout
+│   │   ├── base.css          ← @font-face, CSS variables, reset, body, scanline
+│   │   ├── layout.css        ← Header, currency bar, game-area grid, panels
+│   │   └── index.css
+│   ├── render/               ← One file per render/ JS counterpart
+│   │   ├── commander.css     ← Commander card, stat grid, hp/xp bars
+│   │   ├── hud.css           ← Tabs, log panel, badges, toast, scrollbars
+│   │   ├── jobs.css          ← Job cards, progress bar, danger levels
+│   │   ├── hire.css          ← Recruit and hire cards
+│   │   ├── fort.css          ← Upgrade cards and category badge colours
+│   │   ├── company.css       ← Company stats, fame bar, milestones, roster
+│   │   ├── saves.css         ← Save cards, buttons, input row
+│   │   └── index.css
+│   ├── logic/                ← Game-system visual rules
+│   │   ├── arcane.css        ← Magic tags, lore text, warded badge
+│   │   ├── nations.css       ← Nation cards, threat bars, suppression
+│   │   └── index.css
+│   ├── charCreation/         ← One file per charCreation/ JS counterpart
+│   │   ├── overlay.css       ← Overlay, modal shell, buttons, shake
+│   │   ├── names.css         ← Name input and random button
+│   │   ├── render.css        ← Origin grid, stat bars, lore toggle
+│   │   ├── confirm.css       ← Stat preview box
+│   │   └── index.css
+│   └── style.css             ← Original monolith. Backup only, not linked.
+│
+├── data/                     ← ALL GAME CONTENT LIVES HERE.
+│   ├── game_config.json      ← Every magic number (day duration, XP formula,
+│   │                           level-up gains, starting stats, etc.)
+│   ├── jobs.json             ← 40 contracts across 16 categories
+│   ├── recruit_classes.json  ← 19 hireable classes with declarative bonuses[]
+│   ├── fort_upgrades.json    ← 25 upgrades with declarative effects[]
+│   ├── milestones.json       ← 46 achievement definitions
+│   ├── nations.json          ← 5 nations with threat thresholds & responses
+│   ├── pmc_tiers.json        ← 7 PMC progression tiers (Vagrant → Sovereign)
+│   ├── suppression_events.json ← 8 suppression operation types nations deploy
+│   ├── origins.json          ← 10 character creation backgrounds
+│   ├── fame_ranks.json       ← 8 reputation tier labels
+│   └── commander_ranks.json  ← Title progression by level
+│
+└── js/
+    ├── data.js               ← Loads all JSON via Promise.all(fetch(...))
+    ├── state.js              ← GS object (runtime state) + save/load
+    ├── utils.js              ← Currency, logging, toasts, tab switching,
+    │                           data lookups (getCurrentFameRank etc.)
+    ├── engine.js             ← THE INTERPRETER. Reads DATA, applies effects.
+    │                           No hardcoded IDs here. See ENGINE section.
+    │
+    ├── loader/
+    │   ├── boot.js           ← Shows loading screen immediately on page load
+    │   ├── assets.js         ← Injects Google Fonts + favicon into <head>
+    │   ├── dom.js            ← Builds entire game HTML into #app
+    │   └── init.js           ← Entry point: boot → loadAllData → buildDOM →
+    │                           startGame(). Owns DOMContentLoaded.
+    │
+    ├── logic/
+    │   ├── recruits.js       ← generateRecruit() uses rarityWeight from JSON
+    │   ├── progression.js    ← XP/levelling, fame, milestone evaluation
+    │   ├── actions.js        ← startJob(), hireRecruit(), buyUpgrade()
+    │   └── nations.js        ← Nation threat, suppression spawning/ticking,
+    │                           PMC tier advancement
+    │
+    ├── render/
+    │   ├── hud.js            ← Currency bar, commander card
+    │   ├── roster.js         ← Left panel warband list
+    │   ├── jobs.js           ← Contracts tab + active jobs panel +
+    │   │                       suppression contract cards
+    │   ├── hire.js           ← Hire tab
+    │   ├── fort.js           ← Fort upgrades tab (grouped by category)
+    │   ├── company.js        ← Company tab: stats, fame bar, milestones
+    │   ├── saves.js          ← Chronicle (save/load) tab
+    │   ├── nations.js        ← Nation threat panel, PMC tier card,
+    │   │                       fort status panel
+    │   └── index.js          ← renderAll() — calls every render function
+    │
+    ├── charCreation.js       ← Character creation modal (origins, stat preview)
+    └── main.js               ← Game loop (requestAnimationFrame), startGame(),
+                                modal helpers, getCategoryNote()
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  THE ENGINE (js/engine.js) — HOW IT WORKS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The engine never names an upgrade ID or class name. It works through two
+accumulators:
+
+  getActiveUpgradeEffects()
+    → Scans all built upgrades, collects their effects[] arrays.
+    → Returns: { effectType: [{value, categoryFilter?}, ...], ... }
+
+  getActiveRosterEffects()
+    → Same pattern but for roster member bonuses[].
+
+  accumulateMult(effects, category)
+    → Multiplies (1 + value) for every matching effect.
+    → An effect with categoryFilter only applies when category matches.
+
+  accumulateAdd(effects, category)
+    → Sums value for every matching effect.
+
+Every derived quantity in the game goes through this:
+
+  getJobDuration(job)   → durationMult effects from upgrades + roster
+  getJobReward(job)     → rewardMult effects from upgrades + roster
+  getFameReward(job)    → fameMult effects + config dangerFameDefaults
+  getJobXp(job)         → xpMult effects
+  getHpRegenRate()      → hpRegen + hpRegenMult + hpRegenBonus
+  maxRoster()           → baseRosterSize (config) + rosterSlots effects
+  getCommanderStatBonus() → commanderStatBonus effects
+  getMagicBonus()       → origin magic + magicBonus effects × magicMultiplier
+  companyTotalMagic()   → roster magic sum + getMagicBonus()
+  getNationThreatMult() → 1.0 + nationThreatMult effects (negative = less threat)
+  getSuppressionResist() → suppressionResist effects sum
+  getActiveJobCap()     → base 1 + activeJobCap effects
+
+To add a new mechanic, add a new effect type to the JSON, then add a function
+to engine.js that calls accumulateAdd or accumulateMult on that type. Done.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  EFFECT TYPE REFERENCE (fort_upgrades.json effects[] and recruit bonuses[])
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All current effect types and what they do. All support optional "categoryFilter"
+to restrict to a specific job category (e.g. "arcane", "combat", "intelligence").
+
+  rewardMult          Multiplies contract reward. value: 0.10 = +10%.
+  durationMult        Multiplies contract duration. value: -0.15 = -15%.
+  fameMult            Multiplies fame earned per contract.
+  xpMult              Multiplies XP earned per contract.
+  xpReqMult           Multiplies XP required to level up. Use negative values.
+  hpRegen             Base HP regen rate per day (fraction of maxHp).
+  hpRegenMult         Additive bonus to base hpRegen rate.
+  hpRegenBonus        Same as hpRegenMult (recruit bonus variant).
+  rosterSlots         Additive bonus to max roster size.
+  commanderStatBonus  Additive bonus applied to all commander stats for checks.
+  magicBonus          Additive bonus to company-wide magic total.
+  magicMultiplier     Multiplies ALL magic bonuses (including origin magic).
+  nationThreatMult    Adjusts threat accumulation multiplier. value: -0.25 = 25%
+                      less threat generated from contracts.
+  suppressionResist   Fraction reduction in suppression event effectiveness.
+  activeJobCap        Additive bonus to maximum simultaneous active contracts.
+  blockadeImmunity    Boolean. If true, economic blockade penalties are ignored.
+  fortWarded          Boolean. Marks the fort as warded (unlocks void contracts).
+  unlockRareRecruits  Boolean. Allows rare-rarity classes into the recruit pool.
+  recruitStatBonus    Additive stat bonus applied when generating all recruits.
+                      Requires "stat" field: "str", "end", "lead", or "cun".
+
+To add a new effect type: add it to JSON, add a function in engine.js that reads
+it, call that function wherever the effect should apply.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  MILESTONE CHECK TYPE REFERENCE (milestones.json check.type)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Evaluated in js/logic/progression.js → evaluateMilestoneCheck(check).
+
+  totalJobsDone         GS.totalJobsDone >= check.value
+  rosterLength          GS.roster.length >= check.value
+  rosterFull            GS.roster.length >= maxRoster()
+  bronze                GS.bronze >= check.value
+  fame                  GS.fame >= check.value
+  commanderLevel        GS.commander.level >= check.value
+  upgradeCount          Built upgrade count >= check.value
+  allUpgrades           All upgrades built
+  upgradeBuilt          GS.upgrades[check.value] is truthy
+  fortWarded            isFortWarded() (engine function)
+  rosterHasClass        Any roster member has cls === check.value
+  rosterHasRarity       Any roster member has rarity === check.value
+  hasRareRecruit        Any roster member has rarity === 'rare'
+  hasMagicUser          Any roster member has magic >= magicUserThreshold
+  totalMagicStat        companyTotalMagic() >= check.value
+  completedJobCategory  GS.completedCategories[check.value] > 0
+  categoryJobsDone      GS.completedCategories[check.category] >= check.value
+  categoryJobsDoneMulti Sum of completions across check.categories >= check.value
+  totalStr / totalCun / totalEnd  Company total stat >= check.value
+  specificJobDone       GS.completedJobs[check.value] > 0
+  specificJobDoneCount  GS.completedJobs[check.job] >= check.value
+  pmcTier               GS.pmcTier >= check.value
+  suppressionSurvived   GS.suppressionSurvived >= check.value
+  nationAtRelation      Any nation's relation is at or beyond check.value
+                        in the order: indifferent → neutral → wary → suspicious
+                        → notice → concern → alarm → hostile → war
+  nationThreatReduced   Any nation's threat is currently 0 (was hostile before)
+
+To add a new type: add a case to evaluateMilestoneCheck() in progression.js.
+This is the one place where adding a new content type does require a JS edit,
+but it's a single switch case.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  GAME STATE (js/state.js → GS object)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GS is the single source of truth for all runtime state. It is what gets
+serialised to localStorage on save. All fields:
+
+  bronze               Total wealth in bronze. 100b = 1s, 100s = 1g.
+  day                  Current in-game day (increments every DAY_DURATION secs)
+  commander            { name, origin, portraitSymbol, startingItem,
+                         level, xp, xpNext, hp, maxHp, str, end, lead, cun }
+  roster               Array of hired member objects (generated by recruits.js)
+  activeJobs           Array of { jobId, timeLeft, totalTime }
+  fame                 Numeric fame value
+  fameRank             Index into DATA.fameRanks
+  pmcTier              0-6, current PMC tier index
+  upgrades             { upgradeId: true } for all built fort upgrades
+  milestones           { milestoneId: true } for all achieved milestones
+  totalJobsDone        Cumulative job count
+  completedJobs        { jobId: count } per-job completion counts
+  completedCategories  { category: count } per-category completion counts
+  recruitPool          Currently offered recruit objects
+  nationThreat         { nationId: numericThreat }
+  nationRelations      { nationId: relationString }
+  suppressionEvents    Array of active suppression ops:
+                         { eventId, nationId, timeLeft, totalTime,
+                           resolved?, accepted? }
+  suppressionSurvived  Count of suppression events resolved
+  suppressionPenalties { key: { type, value, categoryFilter?, expiresDay } }
+  lastSuppressionCheck Day when suppression spawning was last evaluated
+  territoryClaimed     Count of territorial contracts completed
+
+When loading a saved game, new fields added since the save was created default
+to safe values. See the Object.assign spread in state.js loadGame().
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CONTRACT SCHEMA (jobs.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Every contract entry:
+
+  id                   Unique string. Referenced by milestones, forbiddenIfActiveJobs.
+  name                 Display name.
+  desc                 One or two sentence description.
+  flavour              Short italic quote shown under description.
+  category             Controls grouping, icons, and category-filtered effects.
+                       Current categories: scouting, escort, guard, bounty,
+                       combat, siege, dungeon, arcane, intelligence, political,
+                       territorial, suppression_counter, nation_pressure,
+                       proxy_war, nation_war, sovereign_ops
+  danger               1-4. Affects default fame if fameBase not set.
+  durationBase         Seconds before completion (modified by engine at runtime).
+  rewardBase           Bronze reward (modified by engine at runtime).
+  xpBase               Base XP (scaled by commander level at runtime).
+  fameBase             Fame earned on completion (modified by engine).
+  requirements         Object with all gate conditions. See REQUIREMENT FIELDS.
+  repeatable           true or false. One-time contracts cannot be taken again.
+  failureRisk          0.0-1.0. Displayed as informational only currently.
+  tooltip              Short hint shown in UI.
+  nationThreatGain     { nationId: delta } applied when contract completes.
+                       Positive = more threat, negative = less threat.
+                       Values are scaled by getNationThreatMult() at runtime.
+
+REQUIREMENT FIELDS (all optional, default to 0 / empty / false):
+
+  minLevel             Commander level gate.
+  minRoster            Number of companions required.
+  minFame              Fame gate.
+  minStr/End/Lead/Cun  Commander stat gates (armoury bonus applied).
+  minMagic             Company-wide magic total gate.
+  minTotalStr/Cun/End  Company-wide combined stat gates.
+  minCompanySize       Commander + roster total.
+  requiresMagicUser    Boolean. Requires at least one member with magic >= 2.
+  requiredClasses      Array of class name strings. One of each must be in roster.
+  forbiddenClasses     Array of class name strings. None may be in roster.
+  forbiddenIfActiveJobs Array of job IDs. None may be currently active.
+  requiredUpgrades     Array of upgrade IDs. All must be built.
+  requiredMilestones   Array of milestone IDs. All must be achieved.
+  maxActiveJobs        Maximum total active contracts while this runs.
+                       War room upgrade adds to this cap via engine.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  NATION & SUPPRESSION SYSTEM
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NATIONS (nations.json):
+
+  id                   String key used in nationThreatGain, GS.nationThreat, etc.
+  type                 duchy | kingdom | theocracy | alliance | empire
+                       Used to filter which suppression events can target them.
+  toleranceThresholds  { notice, concern, alarm, hostile, war } — numeric threat
+                       values at which each escalation level activates.
+  responses            { notice, concern, ... } — flavour text shown in log
+                       when that level is first reached.
+  suppressionStrength  1-9. Informational — can be used for future mechanics.
+  startRelation        Initial relation string before any threat accumulates.
+  pmcTierNotice        Minimum PMC tier before this nation tracks you at all.
+  triggersOnArcaneJobs Boolean (optional). Extra threat for arcane contracts.
+
+ESCALATION ORDER:
+  indifferent → neutral → wary → suspicious → notice → concern → alarm →
+  hostile → war
+
+Threat naturally decays by nationThreatDecayPerDay (config) every in-game day.
+Intelligence Network and Diplomatic Corps upgrades reduce threat accumulation
+multiplicatively. Shadow Operative recruit also reduces it.
+
+SUPPRESSION EVENTS (suppression_events.json):
+
+Nations spawn suppression events when at "alarm" relation or above, checked
+every suppressionCheckIntervalDays (config). Events appear in the Contracts tab
+as special red cards. The player has the duration window to click "Resolve Now".
+If the timer expires without resolution, penaltyIfIgnored is applied.
+
+Each event has:
+  triggersAtRelation   Minimum relation before this event can spawn.
+  sourceNationTypes    Which nation types can spawn it (or "all").
+  effect               { type: "threatReduction", nation: "source"|id, value }
+                       Applied on resolution.
+  penaltyIfIgnored     { type, value, categoryFilter?, duration } applied if
+                       the event expires unresolved.
+  flavourResolved      Log message shown on successful resolution.
+
+PMC TIERS (pmc_tiers.json):
+
+  tier                 0-6 integer.
+  thresholdFame/Bronze/Roster/JobsDone  All four must be met simultaneously.
+  nationThreatMult     Multiplier applied to all nationThreatGain values while
+                       at this tier. 0.0 = invisible, 5.0 = very threatening.
+  unlocks              Array of job categories that become visible at this tier.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  RECRUIT CLASS SCHEMA (recruit_classes.json)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  cls            Display name. Also used as the identifier — must be unique.
+  adj/surnames/givenNames  Name generation pools.
+  hireCostMult   Multiplied against recruitCostRange random value.
+  stats          { str, end, lead, cun } each as [min, max] arrays.
+  magic          Numeric magic contribution. 0 = non-magical.
+  desc           Short description (shown in hire card).
+  lore           Longer flavour text (shown collapsed or on hover).
+  bonuses        Array of declarative bonus objects. See EFFECT TYPE REFERENCE.
+                 Each bonus: { type, value, categoryFilter?, desc }
+  rarity         "common" | "uncommon" | "rare"
+  rarityWeight   Draw weight in recruit pool. 100 = very common, 3 = very rare.
+                 Set to 0 to prevent a class from ever spawning naturally.
+                 Rare classes only appear when isRareUnlocked() returns true
+                 (requires an upgrade with effects: [{type:"unlockRareRecruits"}]).
+
+Currently 19 classes. The pool is weighted-random — no fixed slot system.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CURRENCY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+All money is stored as bronze internally. Display functions split it:
+
+  1 gold   = 100 silver  = 10,000 bronze
+  1 silver = 100 bronze
+
+  formatMoney(bronzeValue)  → "2g 4s 17b" style string
+  moneyToCoins(bronzeValue) → { g, s, b }
+  addMoney(b) / setMoney(b) / canAfford(b)
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  UI STRUCTURE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+The game is a three-column layout inside a fixed viewport:
+
+  LEFT column  (270px)   Commander card + Warband roster
+  CENTER column (flex)   Tab bar: Contracts | Hire | Fort | Company | Chronicle
+  RIGHT column (290px)   PMC tier card, Active jobs, Nation threat, Fort status
+
+Below all columns: the Chronicle log (scrolling event history, 120px tall).
+
+Two overlay modals: character creation (on first load) and save-select (on
+subsequent loads when saves exist).
+
+ALL DOM is built programmatically by js/loader/dom.js into <div id="app">.
+index.html contains no game markup — it is a shell. This means you can
+restructure the layout entirely by editing dom.js without touching HTML.
+
+The CSS uses variables defined in :root. Key ones:
+  --bg, --panel, --parchment   Background layers
+  --border, --border2          Border colours
+  --gold, --gold2              Primary accent colours
+  --text, --text2              Text colours
+  --green2, --red              Status colours
+  Arcane elements use ad-hoc rgba(120,60,180,...) purple tones.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  KNOWN GAPS / THINGS NOT YET IMPLEMENTED
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+These exist in the data but are not yet wired to full game effects:
+
+1. failureRisk on contracts is displayed but does not cause actual failures yet.
+   The framework for it exists — add failure logic in main.js when a job
+   completes (roll against failureRisk, apply consequence if failed).
+
+2. suppressionStrength on nations is stored but not yet used mechanically.
+   Intent: stronger nations should spawn harder suppression events or multiple
+   simultaneous ones.
+
+3. triggersOnArcaneJobs on nations (pale_conclave) is defined but not checked.
+   Should add extra nationThreatGain to arcane contracts for that nation.
+
+4. counter_intelligence and shadow_government categories are in pmc_tiers.json
+   unlocks for tier 4 and 5 respectively, but no jobs exist in those categories
+   yet. They are placeholder names for future content.
+
+5. Roster members have hp/maxHp fields but they don't change during play yet.
+   Intended for future: roster members could be wounded or lost on high-risk
+   contracts, requiring the infirmary and field surgeon to recover them.
+
+6. The "fortDamage" penalty type in suppression_events.json is defined but not
+   implemented in tickSuppressionEvents(). Should degrade a random built upgrade.
+
+7. The blockadeImmunity effect from supply_line is checked in nations.js but
+   the economic blockade suppression event (economic_blockade) does not yet
+   verify this before applying its rewardMult penalty. Cross-check the two.
+
+8. Multiple origins have magicBonus > 0 (hedge_witch, failed_scholar,
+   war_cleric). This correctly flows through getOriginMagicBonus() into
+   companyTotalMagic(). But the character creation stat preview only shows
+   MAG if origin.magicBonus > 0 — verify this renders correctly.
+
+9. The win condition (PMC Tier 6) has no dedicated endgame screen. When
+   GS.pmcTier reaches 6, the game continues playing with the Sovereign Force
+   label. A win screen or epilogue would be appropriate.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  HOW TO ADD NEW CONTENT (quick reference)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ADD A CONTRACT:
+  Edit data/jobs.json. Copy an existing entry, change id/name/desc/requirements.
+  Use an existing category or add a new string — if it's a PMC-tier category,
+  add it to the appropriate tier's unlocks[] in pmc_tiers.json too.
+  Add a category icon to game_config.json pmcTierCategoryIcons if needed.
+  No JS changes required.
+
+ADD A RECRUIT CLASS:
+  Edit data/recruit_classes.json. Add an entry with bonuses[] using existing
+  effect types. Set rarityWeight (higher = more common).
+  No JS changes required.
+
+ADD A FORT UPGRADE:
+  Edit data/fort_upgrades.json. Add effects[] using existing effect types.
+  If you need a new effect type, add a function to engine.js.
+  No JS changes required for existing types.
+
+ADD A MILESTONE:
+  Edit data/milestones.json. Use an existing check.type.
+  If you need a new check type, add one case to evaluateMilestoneCheck() in
+  js/logic/progression.js. That's the only JS change needed.
+
+ADD A NATION:
+  Edit data/nations.json. Use an existing nation as a template.
+  Add nationThreatGain entries pointing to the new nation ID in relevant jobs.
+  No JS changes required.
+
+ADD A SUPPRESSION EVENT:
+  Edit data/suppression_events.json. Use existing penaltyIfIgnored types.
+  The spawning, ticking, and resolution logic in nations.js handles all events
+  generically — no JS changes required.
+
+ADD A NEW GAME CONFIG VALUE:
+  Edit data/game_config.json. Access it in JS as DATA.config?.yourKey ?? default.
+
+CHANGE THE LAYOUT:
+  Edit js/loader/dom.js. All game markup is here.
+
+CHANGE THEMING:
+  Edit css/style.css :root variables.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  TECH NOTES FOR AI AGENTS SPECIFICALLY
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+- Before making changes, read the relevant data files first. The JSON is the
+  specification. The JS is the interpreter. Changes to mechanics belong in data.
+
+- Before adding a JS function, search engine.js. The accumulator pattern means
+  many mechanics are already supported — you just need the right JSON entry.
+
+- GS is mutable global state. DATA is immutable after load. Never write to DATA.
+
+- All render functions are idempotent — calling renderAll() twice is safe.
+  The game loop calls renderCurrency() and renderCommander() every frame.
+  renderAll() is called when something significant changes.
+
+- The log (log() in utils.js) accepts HTML strings. Use <em> and <strong>.
+  Log types: 'info', 'good', 'bad', 'gold'. Gold is for level-ups/milestones.
+
+- Saves are keyed by player-chosen name in localStorage with prefix
+  "ironcompany_save_". The index list is at "ironcompany_saves". There is no
+  save slot limit — the array grows unboundedly.
+
+- The game must run over HTTP. file:// will silently fail on fetch() calls and
+  the boot screen will show a data load error. Always use server_manager.pyw
+  or python -m http.server.
+
+- requestAnimationFrame loop runs continuously. dt (delta time in seconds) is
+  calculated each frame. All timers in GS.activeJobs and GS.suppressionEvents
+  decrement by dt, not by frame count.
+
+- The engine does not yet handle partial effects during gameplay — if an upgrade
+  is built while a job is in progress, the new effect applies immediately on
+  the next getJobDuration/getJobReward call. This is intentional and fine.
+
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+  CHANGELOG
+  (append a short entry here at the end of each working session)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+SESSION 1 — Initial build
+  Single HTML/JS file. Basic incremental loop: jobs, hiring, fort upgrades,
+  fame system, milestones. Medieval retro theme. Currency in bronze/silver/gold.
+
+SESSION 2 — Fragmentation
+  Split into index.html + css/style.css + multiple JS files (logic/, render/).
+
+SESSION 3 — Data-driven refactor (first pass)
+  Moved all constants to JSON files in /data/. Added game_config.json.
+  Character creation with origins. Unlimited named saves via localStorage.
+  Extensive job requirement checks (per-stat, per-class, per-milestone).
+
+SESSION 4 — Fantasy magic system
+  Added magic (MAG) stat to recruits. New magical recruit classes. New arcane
+  fort upgrades (ritual circle, leyline tap, runic gate, etc.). 20+ new
+  contracts across arcane/dungeon categories. Expanded milestones.
+  loader/ folder created; index.html becomes a pure shell.
+
+SESSION 5 — Full data-driven architecture
+  Deleted logic/jobs.js. Created js/engine.js as pure data interpreter.
+  All fort upgrade effects moved to declarative effects[] arrays in JSON.
+  All recruit bonuses moved to declarative bonuses[] arrays in JSON.
+  rarityWeight system for recruit pools. game_config.json holds all
+  magic numbers. Zero hardcoded IDs anywhere in game JS.
+
+SESSION 6 — Nation-state / PMC arc
+  Added nations.json (5 nations), pmc_tiers.json (7 tiers), suppression_events.json
+  (8 event types). New job categories: intelligence, political, territorial,
+  suppression_counter, nation_pressure, proxy_war, nation_war, sovereign_ops.
+  40 total contracts. 25 fort upgrades. 19 recruit classes. 46 milestones.
+  js/logic/nations.js handles threat accumulation, suppression spawning and
+  ticking, PMC tier advancement. Nation threat panel in right column.
+  render/nations.js handles PMC tier card and nation threat bars.
+
+SESSION 7 — This document
+  Created AGENT_HANDOFF.txt. No gameplay changes.
+
+SESSION 8 — Bug fixes (no new content)
+  Seven bugs identified and fixed across three JS files. No JSON changes.
+  js/engine.js: (1) RELATION_LEVELS array was missing 'notice' between 'suspicious'
+    and 'concern' — nations skipped an escalation level, breaking threat comparisons,
+    log messages, milestone checks, and suppression spawning. Fixed by inserting
+    'notice' in the correct position. (2) getMagicFortBonus() used accumulateAdd for
+    magicMultiplier despite it being declared multiplicative — "double all magic"
+    upgrades were non-functional. Fixed by switching to accumulateMult. (3) effectiveCap
+    formula for per-job maxActiveJobs was Math.min(jobCap, jobCap + globalCap - 1),
+    which made War Room activeJobCap upgrades have no effect on capped contracts. Fixed
+    to use jobCap when explicitly set, otherwise globalCap.
+  js/logic/progression.js: (4) gainFame() set GS.fameRank via DATA.fameRanks.indexOf(after)
+    which compares object references and can return -1. Fixed with findIndex() on threshold.
+    (5) Comment incorrectly stated levelUpGains comes from commander_ranks.json — it lives
+    in game_config.json. Corrected.
+  js/logic/recruits.js: (6) Recruits were generated with hp in range 80-119 but maxHp
+    hardcoded to 100 — recruits could start with current HP above their own cap. Fixed
+    by assigning maxHp = hp after the roll.
+  js/logic/nations.js: (7) blockadeImmunity check in applySuppressionPenalty triggered
+    on any rewardMult penalty type, not just economic blockades — other nations' rewardMult
+    suppression penalties were silently swallowed when the supply line upgrade was built.
+    Fixed by checking se.eventId === 'economic_blockade' instead of p.type === 'rewardMult'.
+
+SESSION 9 — server_manager.pyw upgrade
+  Merged superior features from Grimveil's server manager into Iron Company's.
+  No game JS or data files changed.
+  server_manager.pyw:
+  - Replaced subprocess-based http.server with an in-process HTTPServer on a
+    daemon thread. No more spawning a child Python process.
+  - Added _NoCacheHandler: strips If-Modified-Since / If-None-Match request
+    headers and injects Cache-Control: no-store on all responses. Browsers will
+    never receive a 304 — every fetch() call gets fresh data.
+  - Added auto-detect: on launch, searches for iron_company/index.html near the
+    script and CWD and pre-fills the directory field if found.
+  - Added "Auto" port button: scans 8000-8100 and picks the first free port.
+  - Port and directory fields now disable while the server is running (prevents
+    confusing mid-session edits).
+  - Structured HTTP log display: each access log line is parsed into TIME /
+    METHOD / STATUS / SIZE / PATH columns with per-column colour coding
+    (green 2xx, red 4xx, orange 5xx).
+  - Added "Assets" checkbox to hide png/jpg/ico/font/woff requests from the log.
+  - Added "Served" stat counter (bytes delivered, formatted as B/KB/MB).
+  - Added horizontal scrollbar to log area (long paths no longer truncate).
+  - Stats counters (requests, errors, warnings, served, uptime) now update live
+    every 120 ms from the server thread via the existing queue mechanism.
+  - Export format updated to include structured columns for HTTP entries.
+
+SESSION 10 — Server Manager UI overhaul + charCreation fragmentation
+
+  server_manager.pyw — rewritten for usability and bug reporting:
+  - Three-tab layout: Access Log / Errors & Warnings / Request Inspector.
+  - Errors & Warnings tab: automatically captures every 4xx/5xx HTTP response
+    and every warning/error system line. Tab title shows live count. Has its own
+    Clear button. Each entry includes a plain-English cause and fix hint.
+  - Request Inspector tab: click any row in the Access Log to see a full breakdown
+    — status meaning, field-by-field summary, plain-English explanation, and
+    targeted fix hints (e.g. 404 lists common causes; 304 explains the no-cache
+    headers and how to hard-refresh). Raw log line shown at the bottom.
+  - Stats bar expanded: REQUESTS / ERRORS / WARNINGS / SERVED / UPTIME / URL,
+    all updating live every 100 ms.
+  - "Copy URL" button in the bottom bar for quick clipboard copy.
+  - Fonts enlarged throughout (Consolas 10 body, 13 bold for stat values) so
+    numbers are legible at a glance.
+  - Filter checkboxes now include an Assets toggle (hides css/png/woff/etc).
+  - Port and directory fields lock while server is running (prevents accidental
+    mid-session edits).
+
+  js/charCreation.js → js/charCreation/ (folder):
+  - charCreation/state.js   — CC state object (selectedOriginId, showLore map,
+                               nameValue). ccReset(), ccSelectOrigin(), ccToggleLore().
+  - charCreation/names.js   — Random commander name generator. Pool of ~70 first
+                               names + ~25 suffixes (e.g. "the Unbowed", "Ironhand").
+                               ccRandomName() used by the ⚄ Random button.
+  - charCreation/render.js  — renderOriginCards(), renderStatPreview(),
+                               ccToggleLoreAndRender(). New features:
+                               • Stat bars shown inside the selected origin card:
+                                 base stat shown in dark gold, origin bonus shown
+                                 as a bright gold extension. Updates on selection.
+                               • ▼ More lore / ▲ Hide lore toggle per card.
+                                 Lore text lives in origins.json (already present).
+                               • origin-card-top layout: symbol + name/badge side
+                                 by side. Arcane badge displayed when magicBonus > 0.
+  - charCreation/confirm.js — confirmCharCreation() writes to GS. Unchanged logic,
+                               now also shakes the origin grid (not just the name
+                               input) when origin is missing.
+  - charCreation/index.js   — Modal open/close, selectOrigin(), ccRandomiseName(),
+                               keyboard navigation (arrow keys cycle origins, Enter
+                               confirms when focus is not on the name input),
+                               shakeElement() helper.
+
+  css/style.css additions:
+  - .modal--wide (860px) for the wider char creation modal.
+  - .name-input-group with inline ⚄ Random button.
+  - .origin-stat-bars, .origin-bar-row, .origin-bar-track, .origin-bar-base/bonus
+    for the stat bar visualisation inside selected cards.
+  - .origin-lore-toggle and .origin-lore for the expandable lore sections.
+  - .origin-magic-badge, .origin-bonus--magic, .origin-bonus--coin variants.
+  - .cc-section-label, .cc-hint for consistent labels inside the modal.
+  - .name-random-btn styling.
+  - Global readability bumps: .log-entry, .notice, .section-label, .stat-label,
+    .stat-val, .job-name, .job-desc, .upgrade-name, .upgrade-desc, .member-name
+    all have font-size and/or color adjustments for better legibility.
+
+  index.html: removed js/charCreation.js, added the five new module scripts in
+  load order (state → names → render → confirm → index).
+  The old js/charCreation.js file remains on disk but is no longer loaded.
+
+SESSION 11 — Open-source scaffolding + developer documentation
+
+  No gameplay changes. No data files or JS files were modified.
+
+  New files added:
+  - README.md         — Project overview, quickstart instructions, directory
+                        tree, cardinal rule summary, contributing pointer,
+                        tech stack, licence badge.
+  - LICENSE           — MIT licence. Copyright holder is "Iron Company
+                        Contributors" — update as preferred.
+  - CONTRIBUTING.md   — Full contributor guide: content-addition workflow
+                        (data-only for most changes), how to add a new effect
+                        type, code style conventions (camelCase functions,
+                        snake_case IDs, kebab-case CSS), naming tables,
+                        data file conventions (ID permanence, flavour tone,
+                        reward/duration multiplier sign conventions), PR
+                        checklist, and bug report format.
+  - CODE_OF_CONDUCT.md — Contributor Covenant 2.1 adaptation.
+  - .gitignore        — Covers OS cruft, editor dirs, Python cache,
+                        *.ironlog exports, and node_modules.
+  - ARCHITECTURE.md   — Deep technical reference covering: why the
+                        data-driven engine exists and how the accumulator
+                        pattern works; full boot chain with script load order
+                        and reasoning for not using ES modules; game loop
+                        design (real-time, dt-based, selective render); state
+                        and save architecture with ID permanence warning;
+                        nation/suppression system internals; milestone generic
+                        dispatch pattern; render layer contract; CSS
+                        architecture and theming approach; known structural
+                        sharp edges (shallow save merge, global namespace,
+                        rAF throttling in background tabs).
+
+  Evaluation findings (flagged, not fixed):
+  - js/charCreation.js at root is dead code — safe to delete.
+  - suppressionEvents resolved flag: set then immediately spliced in
+    completeSuppressionContract(); never acts as a guard in the tick path.
+    Harmless but misleading.
+  - Ashwood Empire war threshold (6000) may be unreachable without targeted
+    effort. Verify against high-tier job nationThreatGain values.
+
+SESSION 12 — CSS fragmentation
+  No gameplay changes. No data files or JS files modified.
+  css/style.css fragmented into css/ subfolders mirroring the js/ folder
+  structure. css/loader/ holds base variables, reset, and layout.
+  css/render/ holds one partial per render/ JS file (commander, hud, jobs,
+  hire, fort, company, saves). css/logic/ holds arcane.css and nations.css.
+  css/charCreation/ holds overlay, names, render, and confirm partials.
+  Each folder has an index.css barrel. css/index.css is the new master
+  entry point and the only stylesheet linked from index.html. The original
+  style.css is retained on disk as a backup but is no longer active.
+  ARCHITECTURE.md, AGENTS.md, and AGENT_HANDOFF.txt updated to reflect
+  the new structure.
+
+================================================================================
+
+SESSION 13 — Bug audit and fixes (no new content)
+  Full audit of all JS files, JSON data files, and index.html. Five bugs found and fixed.
+  No gameplay content, data files, or CSS changed.
+
+  BUG A — js/logic/progression.js: evaluateMilestoneCheck() nationAtRelation case had its own
+    local levels array that was missing 'notice' between 'suspicious' and 'concern' (the same
+    bug previously fixed in engine.js Session 8 was never carried over to progression.js).
+    Any milestone checking nationAtRelation for 'notice' or higher would get indexOf -1 and
+    fail to trigger. Fixed by inserting 'notice' in the correct position to match RELATION_LEVELS
+    in engine.js.
+
+  BUG B — js/render/fort.js: Dead function renderFortStatus() was defined but never called.
+    renderAll() calls renderFortStatusPanel() which lives in render/nations.js. The dead
+    function in fort.js was a stale copy from before the CSS/render fragmentation with a
+    slightly different markup structure, meaning any future accidental call would silently
+    produce the wrong output. Removed; replaced with a comment pointing to the live function.
+
+  BUG C — js/render/jobs.js: renderSuppressionContracts() (Contracts tab) and
+    renderActiveJobs() (right panel) both created elements with id="suptime_{idx}" and
+    id="supprog_{idx}". Duplicate IDs are invalid HTML and cause document.getElementById()
+    to return whichever element appears first — making any query ambiguous. Fixed by prefixing
+    the right-panel IDs with "rp_" (rp_suptime_{idx}, rp_supprog_{idx}) so both sets are
+    globally unique. gameTick updated to match.
+
+  BUG D — js/charCreation/confirm.js: confirmCharCreation() reset core GS fields when starting
+    a new game but left the entire nation system in its previous state: nationThreat, 
+    nationRelations, suppressionEvents, suppressionSurvived, suppressionPenalties,
+    lastSuppressionCheck, territoryClaimed, pmcTier, and recruitPool all persisted from any
+    prior playthrough. A new game would begin with hostile nations, active suppression ops,
+    wrong PMC tier, and a stale recruit pool. Fixed by fully resetting all nation/suppression/
+    progression fields and re-initialising nationRelations from nation.startRelation.
+    (startGame() in main.js already does this initialisation, but is only called once at boot,
+    not on new game; the fix belongs in confirm.js where the new game is committed.)
+
+  BUG E — js/main.js: gameTick() live-updated regular job progress bars and timers by
+    querying DOM element IDs every frame, but did nothing equivalent for suppression event
+    cards in the Contracts tab. Suppression countdowns only refreshed when renderAll() fired
+    (on job completion or event expiry), making them appear frozen between those events. Fixed
+    by adding per-frame DOM updates for suptime_{idx} / supprog_{idx} in the Contracts tab
+    and rp_suptime_{idx} / rp_supprog_{idx} in the right panel, mirroring the existing pattern
+    for regular active jobs.
+
+SESSION 14 — UI overhaul, settings system, profiles
+  Major changes across CSS, JS, and data. No game mechanics changed.
+  All content (contracts, recruits, upgrades, nations, milestones) is untouched.
+
+  NEW DATA FILES:
+  - data/settings.json  — 5 font presets (medieval, clean, brutalist, elegant, scifi),
+                          4 colour themes (dark_parchment, iron_grey, crimson, arcane),
+                          3 UI density modes (compact, comfortable, spacious), and
+                          defaults for all notification and display toggles.
+  - data/profiles.json  — Schema-documented store for named player profiles. Actual
+                          profile data lives in localStorage under 'ironcompany_profiles'
+                          and 'ironcompany_active_profile'; this file is the authoritative
+                          schema reference and boots with an empty profiles array.
+
+  NEW JS FILES:
+  - js/settings.js      — Full settings engine. loadSettingsData() fetches settings.json
+                          alongside game data in loaderInit. initSettings() runs after
+                          buildDOM() to ensure at least one profile exists and applies the
+                          active profile's font/theme/density to the DOM. applySettings()
+                          sets CSS variables, injects Google Fonts, toggles body classes.
+                          saveSettings(patch) merges into the active profile and persists
+                          to localStorage. Full profile CRUD: createProfile, activateProfile,
+                          deleteProfile, renameProfile, linkProfileToSave.
+  - js/render/settings.js — Renders the Settings tab UI. Font preset cards, colour theme
+                            swatches, density cards, all toggle switches, profile management
+                            panel. All changes go through applyAndSave() → saveSettings().
+
+  MODIFIED JS FILES:
+  - js/loader/init.js   — loaderInit now loads settings.json in parallel with game data
+                          via Promise.all. Calls initSettings() after buildDOM(). Applies
+                          logExpanded setting to the DOM before startGame().
+  - js/loader/dom.js    — Fully rewritten. Header restructured to 3-column grid (title |
+                          active summary | currency+bell). Notification drawer added.
+                          Left panel: commander card always visible; stats collapsed by
+                          default; warband roster collapsible. Center panel: Contracts tab
+                          split into Available/Active sub-tabs; Company tab split into
+                          Overview/Nations/Deeds sub-tabs; Fort tab split into
+                          Improvements/Status sub-tabs; Settings tab added (⚙). Right panel:
+                          active-jobs, nation-threat, fort-works are all individually
+                          collapsible. Log footer is collapsible. All font-sensitive elements
+                          carry .uses-display-font / .uses-ui-font classes.
+  - js/render/index.js  — renderAll() calls new helpers: renderActiveJobsCenter(),
+                          renderNationPanelCenter(), renderFortStatusCenter(),
+                          renderMilestonesPanel(), renderHeaderSummary(). These populate
+                          the new sub-tab targets. renderMilestonesPanel() extracted from
+                          renderCompany() into its own function.
+  - js/render/company.js — Milestones removed from renderCompany() (now in their own
+                           sub-tab via renderMilestonesPanel()); guard added for nullable
+                           DOM elements.
+  - js/render/hud.js    — renderCurrency and renderCommander null-guard all getElementById
+                          calls (safe during settings re-renders that don't rebuild DOM).
+  - js/render/nations.js — _buildNationPanelHTML() extracted as shared builder; used by
+                           both renderNationPanel() (right panel) and
+                           renderNationPanelCenter() (Company > Nations sub-tab).
+  - js/render/jobs.js   — renderJobs() reads SETTINGS.showFlavourText, showThreatPreview,
+                          showReqDetails, showFailureRisk and omits those UI regions when
+                          the user has disabled them.
+  - js/render/hire.js   — renderHire() reads SETTINGS.showLoreText; recruit lore blurbs
+                          are hidden by default and shown when the toggle is on.
+  - js/main.js          — Added: toggleCollapsible(), switchSubTab(), toggleLog(),
+                          renderHeaderSummary() (live pill bar in header), notification
+                          system (pushNotification, toggleNotifPanel, clearNotifications,
+                          showToastAndNotify), gameTick now calls renderHeaderSummary()
+                          every frame and updates center-panel active job timer IDs
+                          center_time_{jobId} / center_prog_{jobId} /
+                          center_suptime_{idx} / center_supprog_{idx}.
+  - js/utils.js         — switchTab() now calls renderSettingsPanel() when settings tab
+                          is opened.
+  - index.html          — Added js/settings.js (before render scripts) and
+                          js/render/settings.js.
+
+  NEW CSS FILES:
+  - css/ui-overhaul.css — All new styles for session 14 features. Imported last in
+                          css/index.css so it overrides earlier rules cleanly. Covers:
+                          CSS variable slots for --font-display/ui/body, --font-scale,
+                          --card-padding/margin/panel-padding (filled by settings.js);
+                          .uses-display-font/.uses-ui-font hooks; scanline override class;
+                          header 3-column grid; header-active-pills with live bars;
+                          notification drawer; collapsible sections and toggles;
+                          sub-tabs with badges; log collapse; settings panel (preset cards,
+                          theme swatches, toggle switches, profile list, form elements).
+
+  KNOWN WIRING NOTE:
+  showToastAndNotify() is defined in main.js as a wrapper that also pushes to the
+  notification drawer. The existing log() calls and showToast() calls throughout the
+  codebase are unchanged — showToastAndNotify is available for any new code that wants
+  the full pipeline. Existing showToast calls already feed the toast overlay; only the
+  bell drawer is additive.
+
+SESSION 15 — Log moved to tab, Repeating queue, font fix
+  No gameplay mechanics changed. No data files modified.
+
+  FONT FIX (css/ and js/render/):
+  All 16 CSS files and 3 JS render files had hardcoded font-family literals
+  ('IM Fell English SC', 'UnifrakturMaguntia', 'IM Fell English') replaced with
+  CSS variable references (var(--font-ui), var(--font-display), var(--font-body)).
+  These variables are set by js/settings.js when a font preset is applied.
+  Font switching in Settings now affects every element in the UI — job cards,
+  upgrade cards, hire cards, commander card, badges, modals, char creation,
+  everything. The only intentional exceptions are css/style.css (backup monolith,
+  not loaded) and the settings.json/settings.js preset definitions which
+  legitimately name the font strings.
+
+  LOG MOVED TO TAB:
+  The log footer bar at the bottom of the screen is removed. A "Log" tab now
+  sits in the main tab bar between Chronicle and ⚙. #log-inner lives inside
+  that tab and fills its full height with column-reverse flex. When any new entry
+  is written by log(), the Log tab button briefly pulses gold via the
+  .log-tab-pulse CSS animation class, added and removed each time. Clicking the
+  Log tab clears the pulse. switchTab('log') in utils.js handles this cleanup.
+  The dead toggleLog() function and log-panel-wrap references were removed from
+  main.js. loaderInit no longer references logExpanded to hide the footer.
+
+  REPEATING QUEUE:
+  GS.repeatQueue added to state.js (array of job IDs). Included in loadGame()
+  defaults spread so old saves default to []. Reset in confirmCharCreation().
+  Contracts → Active now has two sub-sub-tabs: "Once" and "Repeating", toggled
+  by switchSubSubTab() in main.js and styled by .sub-sub-tab-bar/.sub-sub-tab-btn/
+  .sub-sub-tab-content in ui-overhaul.css.
+  addToRepeatQueue(jobId) and removeFromRepeatQueue(jobId) in main.js manage the
+  queue and call renderRepeatQueuePanel() + renderAll().
+  In gameTick, after a job completes, if its jobId is in GS.repeatQueue and
+  checkJobRequirements passes, the job is immediately pushed back onto GS.activeJobs.
+  If requirements fail, the job is removed from the queue with a log warning and
+  showToastAndNotify toast.
+  renderRepeatQueuePanel() in render/index.js draws the Repeating sub-sub-tab:
+  each queued job shows its status (Running/Paused), reward, duration, completion
+  count, and a Remove button. renderRepeatQueuePanel() is called from renderAll().
+  A 🔁 button on each available contract card (job.repeatable !== false) lets the
+  player add/remove from the queue without opening the Active tab. It uses
+  event.stopPropagation() so clicking the repeat button doesn't also start the job.
+  A .repeat-queue-btn CSS class styles the button; .queued variant is gold.
+
+SESSION 16 — Client logging ported from grimveil
+  No gameplay changes. No data files or CSS changed.
+
+  SOURCE: grimveil/js/clientLog.js and grimveil/grimveil_server.pyw.
+  All ported code is adapted to Iron Company naming conventions, GS state object,
+  Iron Company DOM structure, and Iron Company's function inventory.
+
+  NEW FILE: js/clientLog.js
+  Loaded as the first script in index.html (before loader/boot.js) so it captures
+  errors that occur during the boot sequence itself. Implemented as an IIFE with
+  a __icClientLogInitialized guard to prevent double-initialisation if somehow
+  loaded twice. Provides:
+  - Console overrides: console.log/warn/error forward all output to /api/log.
+  - Error capture: window.onerror and window.addEventListener('unhandledrejection')
+    catch uncaught JS errors and unhandled promise rejections and forward them with
+    full stack traces plus an automatic debug snapshot.
+  - window.errorLog() global: verbose error logger usable from anywhere in game code.
+  - Startup verification: 1.8s after DOMContentLoaded, verifies all ~80 expected
+    Iron Company functions are present in window scope and logs missing ones.
+    Also logs DATA/GS/SETTINGS availability.
+  - Debug polling: polls /api/debug/status every 2s; when the server manager sets
+    _debug_request_pending via the "Request State" button, the client sends a full
+    snapshot automatically.
+  - captureSnapshot(): builds a structured object containing: GS state (with
+    recruitPool truncated), DOM status (overlay visibility, active tab, job/roster
+    card counts, log entry count), and function inventory (expected vs present vs
+    missing). Snapshot is sent to /api/debug on every error and on server request.
+  - Public API: window.sendLogToServer (legacy compat), window.requestDebugInfo().
+
+  MODIFIED: server_manager.pyw
+  - _NoCacheHandler.do_GET: intercepts /api/debug/status before passing to
+    super().do_GET(). Returns JSON {request: bool} and resets the pending flag.
+  - _NoCacheHandler.do_POST: new method. Handles /api/log (routes to
+    self.server._on_client_log) and /api/debug (routes to
+    self.server._on_debug_snapshot). Returns 200 OK or 400 Bad Request.
+  - ServerManager.__init__: added on_client_log and on_debug_snapshot callback
+    params, _debug_request_pending flag. request_debug() method added.
+  - ServerManager.start(): wires _on_client_log, _on_debug_snapshot, and
+    _debug_request_pending onto self._httpd so do_POST can reach them from the
+    server thread.
+  - App.__init__: added _client_log_q (queue.Queue), _debug_q (queue.Queue),
+    _client_log_entries (list of (level, message, extra) tuples), _debug_snapshots
+    (list of dicts). ServerManager instantiation passes on_client_log and
+    on_debug_snapshot callbacks that put into these queues.
+  - App._start_poll: now also starts _poll_client_log() and _poll_client_debug().
+  - App._poll_client_log/debug: drain their respective queues every 80ms via
+    self.after(80, ...). Route to _on_client_log/_on_debug_snapshot.
+  - App._on_client_log: routes by level. "good/bad/gold/info/system" → Game Log tab
+    (_append_game_log). "error/warn" → existing Errors tab
+    (_append_client_error_line). All levels → Client Debug tab
+    (_append_debug_log_line).
+  - App._on_debug_snapshot: appends to _debug_snapshots, calls _append_debug_snapshot.
+  - _build_ui: now calls _build_game_log_tab() and _build_client_debug_tab() to add
+    two new notebook tabs after the Inspector tab.
+  - NEW TAB: Game Log — displays in-game events forwarded from Iron Company's log()
+    calls. Colour-coded by level (good=green, bad=red, gold=gold2, info=text,
+    system=text2). HTML stripped for clean display. Export and Clear buttons.
+    Auto-scroll checkbox.
+  - NEW TAB: Client Debug — full pipe: every console.log/warn/error/info plus debug
+    snapshots. Colour-coded (log=text, info=blue, warn=gold, error=red2,
+    snapshot=purple). "Request State" button calls _request_debug_state() →
+    server.request_debug() → sets _debug_request_pending → client sends snapshot.
+    Export and Clear buttons. Auto-scroll.
+  - _append_client_error_line: routes JS errors/warnings into the existing
+    Errors & Warnings tab (reuses _err_txt widget and err_* tags).
+  - _build_bottom_bar: "Export All" button added (purple, leftmost). Calls
+    _export_all() which asks for a directory and writes four timestamped files:
+    access_log, game_log, client_debug, errors.
+  - _export_game_log, _export_debug_log, _export_errors_file: individual export
+    dialogs for each new log type.
+  - _export_all: bulk export to a directory, creates four files with a shared
+    timestamp prefix (iron_company_YYYYMMDD_HHMMSS_*.txt).
+
+SESSION 17 — Widget system and ScreenEngine
+  Architectural change. No gameplay mechanics, data files, or CSS changed.
+  The game plays identically. The DOM construction pipeline is now data-driven.
+
+  ARCHITECTURE PRINCIPLE:
+  The existing codebase had a three-layer inconsistency: dom.js hardcoded the HTML
+  skeleton, render/*.js hardcoded what went into the slots, and screens could only
+  be restructured by editing JS. Session 17 collapses this into two clean layers:
+    data/ui/screens.json  — what the UI looks like (layout, tabs, widgets)
+    js/widgets/*.js       — how each widget type renders itself
+  Adding a new panel, tab, or widget placement is now a JSON edit. Adding a new
+  widget type requires one new JS file and one WidgetRegistry.register() call.
+
+  NEW DATA FILE: data/ui/screens.json
+  Fully declarative screen layout. Describes the header widget slots, overlay
+  placements (notifications, char creation, save-select), and the two main panels
+  (left + center). The center panel is described as a tab tree: tabs → sub-tabs →
+  sub-sub-tabs, each leaf listing its widgets. Every widget entry has a "widget"
+  type name (looked up in WidgetRegistry) and a "config" object passed to the
+  constructor. Loaded by data.js in the same Promise.all as all other game data;
+  accessible as DATA.screens after loadAllData().
+
+  NEW FILE: js/widgets/Widget.js
+  Base class for all widgets. Contract:
+    mount()        — called once; builds initial DOM into this.container
+    render()       — idempotent state sync; called by ScreenEngine.renderAll()
+    tick(dt)       — per-frame update (only override if needed)
+    destroy()      — cleanup listeners and timers
+  Helper methods: el(tag, cls, html), setHTML(html), byId(id), emit(name, detail).
+  All widgets are globals (no module system, consistent with the rest of the codebase).
+
+  NEW FILE: js/ui/WidgetRegistry.js
+  Maps widget type name strings to classes. register(name, klass) called at the
+  bottom of each widget file. get(name) used by ScreenEngine. list() for debug.
+
+  NEW FILE: js/ui/ScreenEngine.js
+  Reads DATA.screens and builds the complete DOM into #app:
+    _buildHeader()         → header element + overlay placeholder
+    _buildOverlay()        → per overlay in screens.overlays[]
+    _buildPanel()          → .panel div; either widget list or tab bar
+    _buildTabBar()         → main tab bar + tab panes; recurses into sub-tabs
+    _buildSubTabBar()      → sub-tab bar + sub-tab panes; recurses into sub-sub-tabs
+    _buildSubSubTabBar()   → sub-sub-tab bar + panes (used by Contracts > Active)
+    _mountWidget()         → instantiates the class from WidgetRegistry, calls mount(),
+                             stores in _widgets Map, registers in _tickable if tick overridden
+  Public API:
+    ScreenEngine.build(app)    — called from loaderInit; replaces buildDOM()
+    ScreenEngine.renderAll()   — iterates _widgets, calls render() on each
+    ScreenEngine.tick(dt)      — iterates _tickable, calls tick(dt) on each
+    ScreenEngine.getWidget(id) — look up a mounted widget by slot id
+
+  NEW FILES: js/widgets/*.js  (11 files, 28 widget types)
+    Widget.js              — base class
+    HeaderWidgets.js       — BrandWidget, CurrencyHudWidget, ActiveSummaryWidget
+    OverlayWidgets.js      — NotificationDrawerWidget, CharCreationWidget, SaveSelectWidget
+    CollapsibleWidget.js   — CollapsibleWidget (generic; mounts child widgets from config)
+    CommanderCardWidget.js — CommanderCardWidget (portrait, name, rank, HP/XP bars)
+    StatWidgets.js         — StatGridWidget, CommanderItemWidget, CompanyMagicWidget
+    RosterListWidget.js    — RosterListWidget
+    ContractWidgets.js     — JobListWidget, ActiveJobsWidget, RepeatQueueWidget
+    HireWidgets.js         — RosterCapWidget, HireListWidget
+    FortWidgets.js         — FortUpgradesWidget, FortStatusWidget
+    CompanyWidgets.js      — PmcTierWidget, CompanyStatsWidget, MagicBarWidget,
+                             FameBarWidget, NationPanelWidget, MilestonesWidget
+    MiscWidgets.js         — SavePanelWidget, LogWidget, SettingsPanelWidget
+
+  MODIFIED FILES:
+  - js/data.js            — DATA.screens field added; screens.json added to the
+                            Promise.all fetch list in loadAllData().
+  - js/loader/init.js     — buildDOM() replaced with ScreenEngine.build(app).
+                            app.innerHTML = '' clears the boot screen first.
+  - js/render/index.js    — renderAll() now delegates to ScreenEngine.renderAll().
+                            Individual render functions (renderJobs etc.) remain as
+                            the widget implementations they are called from.
+  - js/main.js            — gameTick now calls ScreenEngine.tick(dt) each frame
+                            after the per-frame renderCurrency/renderCommander calls.
+  - js/loader/dom.js      — Marked as superseded with a deprecation header comment.
+                            buildDOM() is no longer called. File kept on disk as
+                            reference/fallback; safe to delete once stable.
+  - index.html            — Widget.js, WidgetRegistry.js, ScreenEngine.js, and all
+                            11 widget files added in correct load order (base class
+                            and registry before engine; engine before widgets; widgets
+                            before render scripts).
+
+  TO ADD A NEW SCREEN AREA:
+    1. Add an entry to data/ui/screens.json (tab, sub-tab, or panel slot).
+    2. If the widget type already exists: done.
+    3. If a new widget type is needed: create js/widgets/MyWidget.js extending Widget,
+       call WidgetRegistry.register('MyWidget', MyWidget) at the bottom.
+    4. Add the new script tag to index.html after the other widget tags.
+    No changes to any other JS file required.
+
+  VERIFICATION: 28 widget types referenced in screens.json, 28 registered across
+  widget files, zero missing. All data wiring, script load order, and delegation
+  checks confirmed before packaging.
+
+SESSION 18 — Repeat queue bug fixes + full lore rewrite
+
+  BUG FIXES (js/main.js):
+
+  Bug 1 — Auto-restart not working: checkJobRequirements was called inside
+  the .filter() callback, meaning the completing job was still present in
+  GS.activeJobs at check time. The "already underway" guard in engine.js
+  fired, rechk.ok was false, and the job was removed from repeatQueue instead
+  of restarted. Fix: collect jobs to restart in a _repeatRestarts array inside
+  the filter, then process them AFTER .filter() completes — when the job is
+  fully removed from GS.activeJobs. completedAny is also set to true on
+  successful restart so renderAll fires immediately.
+
+  Bug 2 — Must click manually to start: addToRepeatQueue only added to the
+  queue but never started the job. Fix: after queuing, check if the job is
+  already running. If not, and if checkJobRequirements passes, push immediately
+  onto GS.activeJobs and log the start. The 🔁 button now queues AND starts
+  in one action.
+
+  LORE REWRITE — WORLD SETTING:
+  The Iron Company now operates in a magi-tech near-modern world. Magic is
+  mundane — every person can perform minor workings (conjuring water, basic
+  ward maintenance, self-augmentation). Technology runs on mana rather than
+  electricity. The mana-grid is infrastructure like power grids. Mages are
+  dangerous not because they use magic but because of how much they know and
+  how many workings they can sustain simultaneously. Any common soldier
+  self-augments as standard. The Iron Company is a PMC operating in this
+  environment. Language shifts from medieval fantasy to professional-contractor
+  in a mana-powered world.
+
+  REWRITTEN JSON FILES (text only — no mechanical values changed):
+
+  fame_ranks.json     — 8 ranks rewritten (Off the Grid → Continental Legend)
+  commander_ranks.json — 7 titles rewritten (Unlicensed Operator → Undying Accord)
+  pmc_tiers.json      — 7 tier desc/flavour rewritten; references mana-grid,
+                        Accord, contractor licensing, strategic military capacity
+  nations.json        — 5 nations rewritten; medieval kingdoms become Accord
+                        signatories with trade registries, mana-sensors, compliance
+                        ministries, and joint rapid-response forces
+  origins.json        — 10 origins rewritten; discharged soldier becomes discharged
+                        veteran with service augments; hedge witch becomes unlicensed
+                        practitioner; war cleric becomes lapsed sanctioned channeller
+  recruit_classes.json — 19 classes, desc and lore rewritten; Footsoldier runs
+                        standard self-enchantment, Battle-Mage failed Academy
+                        certification not from lack of output but lack of restraint,
+                        Hex-Scout has no registerable mana-signature
+  suppression_events.json — 8 events rewritten; hired assassins become termination
+                           contracts, blockades become commerce embargoes, inquisition
+                           raids become mana compliance inspections
+  fort_upgrades.json  — 25 upgrades, name/desc/flavour rewritten; smithy becomes
+                        fabrication bay, stables becomes vehicle bay, ritual circle
+                        becomes mana-focus array, leyline tap becomes ley-node tap
+  milestones.json     — all 46 milestones rewritten with near-modern PMC language
+  jobs.json           — all 40 contracts rewritten; road patrol becomes perimeter
+                        check, wool merchant escort becomes commodity convoy escort,
+                        demon binding becomes class-four entity containment,
+                        void incursion becomes mana-layer breach response
+
+  All JSON files validated — zero parse errors, no stale medieval-only
+  vocabulary detected.
+
+SESSION 18 — Repeat queue bug fixes + full lore rewrite (magi-tech world)
+
+  REPEAT QUEUE BUG FIXES (js/main.js):
+
+  Bug 1 — Auto-restart silently failing:
+    Root cause: checkJobRequirements was called inside the GS.activeJobs.filter()
+    callback while the completing job was still present in GS.activeJobs. The
+    "already underway" check (engine.js line 267) fired, rechk.ok was false, and
+    the job was removed from GS.repeatQueue rather than restarted.
+    Fix: Collect jobs for restart in a _repeatRestarts array inside the filter
+    callback. After filter() completes — when the job is fully removed from
+    GS.activeJobs — iterate _repeatRestarts and run checkJobRequirements cleanly.
+    Set completedAny = true after restart so renderAll fires immediately.
+
+  Bug 2 — Must click manually to start a queued job:
+    Root cause: addToRepeatQueue() only pushed the jobId to GS.repeatQueue with
+    no logic to start an idle queued job immediately.
+    Fix: After pushing to the queue, check whether the job is already in
+    GS.activeJobs. If not, and if checkJobRequirements passes, push it onto
+    GS.activeJobs immediately. The 🔁 button now means "add to repeat queue AND
+    start now if not already running."
+
+  LORE REWRITE — WORLD CONTEXT:
+  The Iron Company operates in a magi-tech near-modern world. Magic is not special
+  — every person can perform minor workings (a commoner can conjure water to drink).
+  Technology runs on mana rather than electricity. The population is large because
+  mana solves many baseline survival needs individually. Common soldiers self-augment
+  as standard practice. Mages are feared not because they use magic but because of
+  the breadth and depth of what they know and can channel simultaneously. The Iron
+  Company is a licensed PMC operating within a Continental Accord regulatory
+  framework. All medieval/fantasy language replaced with professional-contractor
+  and regulatory-bureaucracy vocabulary.
+
+  REWRITTEN DATA FILES (text fields only; all mechanics unchanged):
+  - data/fame_ranks.json      — 8 labels rewritten (Off the Grid → Continental Legend)
+  - data/commander_ranks.json — 7 titles rewritten (Unlicensed Operator → Undying Accord)
+  - data/pmc_tiers.json       — 7 entries: name/desc/flavour rewritten
+  - data/nations.json         — 5 entries: name/desc/responses rewritten (nations are
+                                now state governments, trade combines, republics, and
+                                the Ashwood Accord as a continental political entity)
+  - data/origins.json         — 10 entries: name/desc/flavour/lore/startingItem rewritten
+                                (Discharged Soldier → Demobilised Soldier; Hedge Witch →
+                                Field Ritualist with practical mana tradition; Expelled
+                                Scholar → Expelled Accord Academic; etc.)
+  - data/recruit_classes.json — 18 classes: cls/desc/lore rewritten + adj arrays updated
+                                to magi-tech vocabulary (Ward-Etched, Null-Sig, Grid-Trained,
+                                etc.). The core gameplay distinction is maintained: everyone
+                                can use basic magic; specialists are dangerous because of
+                                output and breadth.
+  - data/suppression_events.json — 8 events: name/desc/flavour/flavourResolved rewritten
+                                (Spies in Camp → Asset Compromise; Inquisition Raid →
+                                Arcane Compliance Audit; Military Exercise → Combined
+                                Arms Demonstration; etc.)
+  - data/fort_upgrades.json   — 25 upgrades: name/desc/flavour rewritten (Forge → Fabrication
+                                Shop; Ritual Circle → Arcane Array; Chapel → Restoration Suite;
+                                Great Hall → Operations Hall; War Room → Operations Centre; etc.)
+  - data/milestones.json      — 46 milestones: label/desc/flavour rewritten. check fields
+                                and ids are unchanged.
+  - data/jobs.json            — 40 contracts: name/desc/flavour rewritten. All mechanical
+                                fields (durationBase, rewardBase, xpBase, requirements, etc.)
+                                unchanged. Medieval job names replaced with PMC contractor
+                                terminology (Road Warden's Work → Road Security Detail;
+                                Wool Merchant Escort → Logistics Escort; etc.)

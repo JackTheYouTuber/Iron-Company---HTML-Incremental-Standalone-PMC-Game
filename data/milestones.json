@@ -1,0 +1,476 @@
+[
+  {
+    "id": "first_job",
+    "label": "First Contract Filed",
+    "desc": "Complete your first contract.",
+    "flavour": "Mana-credit transferred. Operation logged. The Iron Company has a first entry in the ledger.",
+    "check": {
+      "type": "totalJobsDone",
+      "value": 1
+    }
+  },
+  {
+    "id": "five_jobs",
+    "label": "Five Operations Completed",
+    "desc": "Complete 5 contracts.",
+    "flavour": "Five contracts in the record. Still operational. The survival rate for new PMCs at this stage is not encouraging. You are ahead of it.",
+    "check": {
+      "type": "totalJobsDone",
+      "value": 5
+    }
+  },
+  {
+    "id": "ten_jobs",
+    "label": "Established Operator",
+    "desc": "Complete 10 contracts.",
+    "flavour": "Ten operations. The pattern is holding. The company is not a coincidence anymore.",
+    "check": {
+      "type": "totalJobsDone",
+      "value": 10
+    }
+  },
+  {
+    "id": "twenty_jobs",
+    "label": "Proven Track Record",
+    "desc": "Complete 20 contracts.",
+    "flavour": "Twenty entries. The clients are reading that number before they brief you now.",
+    "check": {
+      "type": "totalJobsDone",
+      "value": 20
+    }
+  },
+  {
+    "id": "thirty_jobs",
+    "label": "Operational Continuity",
+    "desc": "Complete 30 contracts.",
+    "flavour": "Thirty contracts. The fort is real. The ledger is real. The Iron Company is beginning to look like something that will still be operational next year.",
+    "check": {
+      "type": "totalJobsDone",
+      "value": 30
+    }
+  },
+  {
+    "id": "first_hire",
+    "label": "First Personnel Hire",
+    "desc": "Recruit your first contractor.",
+    "flavour": "The company has its first hire. The paperwork is filed. The operation begins to feel real.",
+    "check": {
+      "type": "rosterLength",
+      "value": 1
+    }
+  },
+  {
+    "id": "five_men",
+    "label": "Five Personnel Signed",
+    "desc": "Have 5 companions on the active roster.",
+    "flavour": "Five operators. The Iron Company is a unit now, not a solo act.",
+    "check": {
+      "type": "rosterLength",
+      "value": 5
+    }
+  },
+  {
+    "id": "full_company",
+    "label": "Roster at Capacity",
+    "desc": "Fill your roster to maximum capacity.",
+    "flavour": "Every available personnel slot filled. You are running at full operational strength for your current clearance tier.",
+    "check": {
+      "type": "rosterFull",
+      "value": 1
+    }
+  },
+  {
+    "id": "gold_rich",
+    "label": "Capital Reserve",
+    "desc": "Accumulate 10,000 bronze at once.",
+    "flavour": "Ten thousand in reserve. The Iron Company has a real balance sheet.",
+    "check": {
+      "type": "bronze",
+      "value": 10000
+    }
+  },
+  {
+    "id": "wealthy",
+    "label": "Significant Capital",
+    "desc": "Accumulate 50,000 bronze at once.",
+    "flavour": "Fifty thousand. You are operating at a scale that warrants a registered corporate structure.",
+    "check": {
+      "type": "bronze",
+      "value": 50000
+    }
+  },
+  {
+    "id": "fame_known",
+    "label": "Regional Profile",
+    "desc": "Reach 150 renown.",
+    "flavour": "One-fifty. You are a recognised name in operational circles. Clients seek you rather than the reverse.",
+    "check": {
+      "type": "fame",
+      "value": 150
+    }
+  },
+  {
+    "id": "fame_feared",
+    "label": "Strategic Reputation",
+    "desc": "Reach 800 renown.",
+    "flavour": "Eight hundred renown. Strategic analysts at government level have started citing your operational history.",
+    "check": {
+      "type": "fame",
+      "value": 800
+    }
+  },
+  {
+    "id": "fame_legend",
+    "label": "Continental Benchmark",
+    "desc": "Reach 2000 renown.",
+    "flavour": "Two thousand. The Iron Company is referenced in military doctrine assessments. The reference is not flattering. That is appropriate.",
+    "check": {
+      "type": "fame",
+      "value": 2000
+    }
+  },
+  {
+    "id": "lv5",
+    "label": "Senior Operator",
+    "desc": "Reach commander level 5.",
+    "flavour": "Level five. Your field record justifies the billing rate. Clients who were sceptical have stopped being sceptical.",
+    "check": {
+      "type": "commanderLevel",
+      "value": 5
+    }
+  },
+  {
+    "id": "lv8",
+    "label": "Operational Legend",
+    "desc": "Reach commander level 8.",
+    "flavour": "Level eight. Your professional history is long enough that new contractors reference it in their own intake profiles.",
+    "check": {
+      "type": "commanderLevel",
+      "value": 8
+    }
+  },
+  {
+    "id": "fort_built",
+    "label": "Base Infrastructure Active",
+    "desc": "Complete 3 fort upgrades.",
+    "flavour": "Three upgrades commissioned. The fort is functional as an operational base, not merely habitable.",
+    "check": {
+      "type": "upgradeCount",
+      "value": 3
+    }
+  },
+  {
+    "id": "fort_strong",
+    "label": "Established Operations Base",
+    "desc": "Complete 7 fort upgrades.",
+    "flavour": "Seven upgrades. The fort is now a genuine PMC facility, not a reclaimed ruin with good bones.",
+    "check": {
+      "type": "upgradeCount",
+      "value": 7
+    }
+  },
+  {
+    "id": "full_fort",
+    "label": "Maximum Infrastructure",
+    "desc": "Complete all fort upgrades.",
+    "flavour": "Every available upgrade commissioned and operational. The fort is running at full capacity on every metric.",
+    "check": {
+      "type": "allUpgrades",
+      "value": 1
+    }
+  },
+  {
+    "id": "first_magic",
+    "label": "Practitioner Hired",
+    "desc": "Have a mana-capable companion on your roster.",
+    "flavour": "First practitioner on staff. Your company now has active mana-output capability beyond standard operator augmentation.",
+    "check": {
+      "type": "hasMagicUser",
+      "value": 1
+    }
+  },
+  {
+    "id": "arcane_initiate",
+    "label": "Mana-Capable Formation",
+    "desc": "Reach 10 combined company magic.",
+    "flavour": "Ten combined. Your company's aggregate mana-output is now a factor on contracts that require it.",
+    "check": {
+      "type": "totalMagicStat",
+      "value": 10
+    }
+  },
+  {
+    "id": "arcane_scholar",
+    "label": "High-Output Practitioner Unit",
+    "desc": "Reach 25 combined company magic.",
+    "flavour": "Twenty-five combined. A Conclave assessor would classify this formation as a significant mana-output entity. They would be correct.",
+    "check": {
+      "type": "totalMagicStat",
+      "value": 25
+    }
+  },
+  {
+    "id": "fort_warded",
+    "label": "Warded Perimeter Active",
+    "desc": "Install the Runic Gate.",
+    "flavour": "The perimeter wards are live. Your fort is broadcasting a clear signal to anything operating in the mana-layer.",
+    "check": {
+      "type": "upgradeBuilt",
+      "value": "runic_gate"
+    }
+  },
+  {
+    "id": "rare_recruit",
+    "label": "Premium Personnel",
+    "desc": "Hire a rare-rarity companion.",
+    "flavour": "Rare-grade operator on contract. The intake process was complicated. The result justifies it.",
+    "check": {
+      "type": "hasRareRecruit",
+      "value": 1
+    }
+  },
+  {
+    "id": "first_arcane_contract",
+    "label": "First Arcane Operation",
+    "desc": "Complete an arcane contract.",
+    "flavour": "First arcane operation completed. The Conclave's compliance desk has probably received an automated alert.",
+    "check": {
+      "type": "completedJobCategory",
+      "value": "arcane"
+    }
+  },
+  {
+    "id": "dungeon_delver",
+    "label": "Deep-Site Certified",
+    "desc": "Complete your first dungeon contract.",
+    "flavour": "First deep-site operation filed. The briefing materials for those contracts do not cover everything that is actually down there.",
+    "check": {
+      "type": "completedJobCategory",
+      "value": "dungeon"
+    }
+  },
+  {
+    "id": "bounty_hunter",
+    "label": "Retrieval Record",
+    "desc": "Complete 3 bounty contracts.",
+    "flavour": "Three bounty operations cleared. Your company has a demonstrated track record in the retrieval and termination space.",
+    "check": {
+      "type": "categoryJobsDone",
+      "value": 3,
+      "category": "bounty"
+    }
+  },
+  {
+    "id": "combat_proven",
+    "label": "Combat-Rated",
+    "desc": "Complete 5 combat or siege contracts.",
+    "flavour": "Five direct-action operations. The Iron Company's combat record is now empirically established.",
+    "check": {
+      "type": "categoryJobsDoneMulti",
+      "value": 5,
+      "categories": [
+        "combat",
+        "siege"
+      ]
+    }
+  },
+  {
+    "id": "pmc_tier_1",
+    "label": "Licensed PMC Status",
+    "desc": "Reach Iron Company tier.",
+    "flavour": "Tier One. You are now a registered private military contractor with a verified operational base. Nations are taking note.",
+    "check": {
+      "type": "pmcTier",
+      "value": 1
+    }
+  },
+  {
+    "id": "pmc_tier_2",
+    "label": "Iron Warband",
+    "desc": "Reach Iron Warband tier.",
+    "flavour": "Tier Two. You are in the strategic planning documents of at least one government. This is confirmation of relevance.",
+    "check": {
+      "type": "pmcTier",
+      "value": 2
+    }
+  },
+  {
+    "id": "pmc_tier_3",
+    "label": "Iron Regiment",
+    "desc": "Reach Iron Regiment tier.",
+    "flavour": "Tier Three. Suppression files have been opened by multiple Accord members. You are operating above the threshold where they can ignore you.",
+    "check": {
+      "type": "pmcTier",
+      "value": 3
+    }
+  },
+  {
+    "id": "pmc_tier_4",
+    "label": "Iron Legion",
+    "desc": "Reach Iron Legion tier.",
+    "flavour": "Tier Four. A national security council mentioned your name in a classified session. They were not discussing neutrality.",
+    "check": {
+      "type": "pmcTier",
+      "value": 4
+    }
+  },
+  {
+    "id": "pmc_tier_5",
+    "label": "Iron Nation",
+    "desc": "Reach Iron Nation tier.",
+    "flavour": "Tier Five. The Iron Company is no longer classifiable as a PMC under any Accord framework. The category above PMC doesn't have an official name yet. You are defining it.",
+    "check": {
+      "type": "pmcTier",
+      "value": 5
+    }
+  },
+  {
+    "id": "pmc_tier_6",
+    "label": "Sovereign Force",
+    "desc": "Reach PMC Tier 6.",
+    "flavour": "You have reached the top of the classification structure. There is no tier above this because no one expected anyone to reach it. You have arrived at a place that did not officially exist.",
+    "check": {
+      "type": "pmcTier",
+      "value": 6
+    }
+  },
+  {
+    "id": "first_suppression",
+    "label": "First Suppression Weathered",
+    "desc": "Survive your first suppression event.",
+    "flavour": "A government launched an official suppression operation against the Iron Company. It did not succeed.",
+    "check": {
+      "type": "suppressionSurvived",
+      "value": 1
+    }
+  },
+  {
+    "id": "suppression_veteran",
+    "label": "Suppression-Hardened",
+    "desc": "Survive 5 suppression events.",
+    "flavour": "Five suppression operations survived and closed. The Iron Company has been the target of state-level suppression half a decade running and is still operational. That fact is itself intelligence.",
+    "check": {
+      "type": "suppressionSurvived",
+      "value": 5
+    }
+  },
+  {
+    "id": "nation_feared",
+    "label": "Threat Classification \u2014 Hostile",
+    "desc": "Have any nation reach hostile relation.",
+    "flavour": "A national government has formally reclassified the Iron Company as a hostile non-state actor. This is the clearest possible confirmation of strategic relevance.",
+    "check": {
+      "type": "nationAtRelation",
+      "value": "hostile"
+    }
+  },
+  {
+    "id": "nation_broken",
+    "label": "Threat Neutralised",
+    "desc": "Reduce a hostile nation's threat to zero.",
+    "flavour": "A nation that committed to your suppression has been walked back to neutrality. The operational lesson has been delivered and received.",
+    "check": {
+      "type": "nationThreatReduced",
+      "value": 1
+    }
+  },
+  {
+    "id": "first_territory",
+    "label": "First Territorial Operation",
+    "desc": "Complete a territorial contract.",
+    "flavour": "First territorial operation completed. The Iron Company now has a documented claim on something that wasn't on any map before.",
+    "check": {
+      "type": "completedJobCategory",
+      "value": "territorial"
+    }
+  },
+  {
+    "id": "claim_territory",
+    "label": "Territorial Presence",
+    "desc": "Complete 3 territorial contracts.",
+    "flavour": "Three territorial operations. The Iron Company's footprint has expanded past the fort perimeter in a formally documented sense.",
+    "check": {
+      "type": "categoryJobsDone",
+      "value": 3,
+      "category": "territorial"
+    }
+  },
+  {
+    "id": "first_intelligence",
+    "label": "First Intelligence Operation",
+    "desc": "Complete an intelligence contract.",
+    "flavour": "First information operation cleared. Your company is now operating in the tier where information is the primary asset.",
+    "check": {
+      "type": "completedJobCategory",
+      "value": "intelligence"
+    }
+  },
+  {
+    "id": "spy_network",
+    "label": "Operational Intelligence Capability",
+    "desc": "Complete 5 intelligence contracts.",
+    "flavour": "Five intelligence operations. The Iron Company has a demonstrated information network and the operational history to prove it.",
+    "check": {
+      "type": "categoryJobsDone",
+      "value": 5,
+      "category": "intelligence"
+    }
+  },
+  {
+    "id": "political_player",
+    "label": "Political Operator",
+    "desc": "Complete 3 political contracts.",
+    "flavour": "Three political operations completed. Governments now factor the Iron Company into their diplomatic calculus.",
+    "check": {
+      "type": "categoryJobsDone",
+      "value": 3,
+      "category": "political"
+    }
+  },
+  {
+    "id": "sovereignty_approach",
+    "label": "Multidomain Operator",
+    "desc": "Complete contracts in territorial, political, and intelligence categories.",
+    "flavour": "Territorial, political, and intelligence operations all cleared. The Iron Company is operating across every domain that defines a strategic power. The categorisation gap is closing.",
+    "check": {
+      "type": "categoryJobsDoneMulti",
+      "value": 4,
+      "categories": [
+        "territorial",
+        "political",
+        "intelligence",
+        "suppression_counter"
+      ]
+    }
+  },
+  {
+    "id": "defect_general_done",
+    "label": "The General's File",
+    "desc": "Complete the Defect the General contract.",
+    "flavour": "The general has been turned. Their operational knowledge is now part of the Iron Company's intelligence picture. Veldrath is reconsidering several standing assumptions.",
+    "check": {
+      "type": "specificJobDone",
+      "value": "defect_the_general"
+    }
+  },
+  {
+    "id": "forty_jobs",
+    "label": "Consistent Record",
+    "desc": "Complete 40 contracts.",
+    "flavour": "Forty operations cleared. The Iron Company is not an anomaly. It is a sustained operational reality.",
+    "check": {
+      "type": "totalJobsDone",
+      "value": 40
+    }
+  },
+  {
+    "id": "sixty_jobs",
+    "label": "Enduring Operator",
+    "desc": "Complete 60 contracts.",
+    "flavour": "Sixty contracts. The Iron Company has been running long enough to be a reference point for other organisations.",
+    "check": {
+      "type": "totalJobsDone",
+      "value": 60
+    }
+  }
+]

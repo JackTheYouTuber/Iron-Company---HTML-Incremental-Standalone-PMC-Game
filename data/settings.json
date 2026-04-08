@@ -1,0 +1,187 @@
+{
+  "_comment": "User-configurable settings. Saved per-profile in profiles.json. Edit defaults here.",
+
+  "defaults": {
+    "fontPreset":        "medieval",
+    "uiDensity":        "comfortable",
+    "notifyJobDone":    true,
+    "notifyLevelUp":    true,
+    "notifyMilestone":  true,
+    "notifyNation":     true,
+    "notifySuppression":true,
+    "notifyPmcTier":    true,
+    "logExpanded":      true,
+    "logMaxEntries":    120,
+    "showFlavourText":  true,
+    "showLoreText":     false,
+    "showFailureRisk":  true,
+    "showThreatPreview":true,
+    "showReqDetails":   true,
+    "scanlines":        true,
+    "theme":            "dark_parchment",
+    "animationsEnabled":true,
+    "rosterCollapsed":  false,
+    "rightPanelCollapsed": false
+  },
+
+  "fontPresets": [
+    {
+      "id": "medieval",
+      "label": "Medieval Ink",
+      "description": "The classic Iron Company look — UnifrakturMaguntia titles, IM Fell English body.",
+      "displayFont":  "'UnifrakturMaguntia', cursive",
+      "uiFont":       "'IM Fell English SC', serif",
+      "bodyFont":     "'IM Fell English', serif",
+      "googleFonts":  "family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC"
+    },
+    {
+      "id": "clean",
+      "label": "Clean & Readable",
+      "description": "Cinzel titles, Lato body — high legibility with a classic engraved feel.",
+      "displayFont":  "'Cinzel Decorative', serif",
+      "uiFont":       "'Cinzel', serif",
+      "bodyFont":     "'Lato', sans-serif",
+      "googleFonts":  "family=Cinzel+Decorative:wght@400;700&family=Cinzel:wght@400;600&family=Lato:ital,wght@0,400;0,700;1,400"
+    },
+    {
+      "id": "brutalist",
+      "label": "Brutalist Print",
+      "description": "Anton titles, IBM Plex Mono body — cold, military, industrial.",
+      "displayFont":  "'Anton', sans-serif",
+      "uiFont":       "'Share Tech Mono', monospace",
+      "bodyFont":     "'IBM Plex Mono', monospace",
+      "googleFonts":  "family=Anton&family=Share+Tech+Mono&family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400"
+    },
+    {
+      "id": "elegant",
+      "label": "Gilded & Elegant",
+      "description": "Cormorant Garamond throughout — refined luxury.",
+      "displayFont":  "'Cormorant SC', serif",
+      "uiFont":       "'Cormorant SC', serif",
+      "bodyFont":     "'Cormorant Garamond', serif",
+      "googleFonts":  "family=Cormorant+SC:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400"
+    },
+    {
+      "id": "scifi",
+      "label": "Tactical Console",
+      "description": "Orbitron titles, Rajdhani body — sci-fi PMC tactical display.",
+      "displayFont":  "'Orbitron', sans-serif",
+      "uiFont":       "'Rajdhani', sans-serif",
+      "bodyFont":     "'Rajdhani', sans-serif",
+      "googleFonts":  "family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700"
+    }
+  ],
+
+  "uiDensityPresets": [
+    {
+      "id": "compact",
+      "label": "Compact",
+      "description": "Smaller cards, tighter spacing — more information visible at once.",
+      "cardPadding":    "6px 9px",
+      "cardMargin":     "5px",
+      "baseFontScale":  "0.92",
+      "panelPadding":   "10px"
+    },
+    {
+      "id": "comfortable",
+      "label": "Comfortable",
+      "description": "Balanced spacing — the default.",
+      "cardPadding":    "10px 12px",
+      "cardMargin":     "8px",
+      "baseFontScale":  "1.0",
+      "panelPadding":   "14px"
+    },
+    {
+      "id": "spacious",
+      "label": "Spacious",
+      "description": "Generous padding — easier on the eyes for long sessions.",
+      "cardPadding":    "14px 16px",
+      "cardMargin":     "11px",
+      "baseFontScale":  "1.08",
+      "panelPadding":   "18px"
+    }
+  ],
+
+  "themes": [
+    {
+      "id": "dark_parchment",
+      "label": "Dark Parchment",
+      "description": "The classic — dark ochre, aged gold, ink and fire.",
+      "vars": {
+        "--bg":        "#0d0b08",
+        "--panel":     "#131008",
+        "--border":    "#4a3810",
+        "--border2":   "#6a5020",
+        "--gold":      "#c8922a",
+        "--gold2":     "#e8b84b",
+        "--text":      "#d4bc88",
+        "--text2":     "#806848",
+        "--red":       "#a03020",
+        "--green2":    "#6aaa50",
+        "--parchment": "#191408",
+        "--hp-red":    "#6a1818",
+        "--rare":      "#a060d0"
+      }
+    },
+    {
+      "id": "iron_grey",
+      "label": "Iron Grey",
+      "description": "Cold steel and ash — muted greys with silver highlights.",
+      "vars": {
+        "--bg":        "#0c0d0f",
+        "--panel":     "#11131a",
+        "--border":    "#2a3040",
+        "--border2":   "#4a5060",
+        "--gold":      "#8898b8",
+        "--gold2":     "#aabbd8",
+        "--text":      "#c8d0dc",
+        "--text2":     "#5a6278",
+        "--red":       "#903028",
+        "--green2":    "#50987a",
+        "--parchment": "#14161e",
+        "--hp-red":    "#602028",
+        "--rare":      "#8860c8"
+      }
+    },
+    {
+      "id": "crimson",
+      "label": "Crimson Company",
+      "description": "Blood red and black — aggressive, battle-worn.",
+      "vars": {
+        "--bg":        "#0a0608",
+        "--panel":     "#100810",
+        "--border":    "#4a1820",
+        "--border2":   "#6a2830",
+        "--gold":      "#c84040",
+        "--gold2":     "#e86060",
+        "--text":      "#d4a0a0",
+        "--text2":     "#805060",
+        "--red":       "#c02020",
+        "--green2":    "#60a850",
+        "--parchment": "#140a10",
+        "--hp-red":    "#6a1020",
+        "--rare":      "#a060d0"
+      }
+    },
+    {
+      "id": "arcane",
+      "label": "Arcane Veil",
+      "description": "Deep purple and void — for those who walk the arcane path.",
+      "vars": {
+        "--bg":        "#080610",
+        "--panel":     "#0e0a1a",
+        "--border":    "#3a2060",
+        "--border2":   "#5a3880",
+        "--gold":      "#9060d0",
+        "--gold2":     "#b888e8",
+        "--text":      "#c8b0e8",
+        "--text2":     "#7060a8",
+        "--red":       "#a82840",
+        "--green2":    "#60b090",
+        "--parchment": "#100818",
+        "--hp-red":    "#5a1840",
+        "--rare":      "#d090f0"
+      }
+    }
+  ]
+}

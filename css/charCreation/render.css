@@ -1,0 +1,63 @@
+/* ===================== ORIGIN GRID ===================== */
+.origin-grid {
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+    gap:10px; margin-bottom:20px;
+}
+.origin-card {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:12px; cursor:pointer; transition:border-color 0.15s, background 0.15s;
+    position:relative;
+}
+.origin-card:hover    { border-color:var(--gold); background:#1e1608; }
+.origin-card.selected { border-color:var(--gold2); background:#221a06; box-shadow:0 0 12px rgba(200,140,30,0.12); }
+.origin-card.selected::before {
+    content:''; position:absolute; top:0; left:0; right:0; height:2px; background:var(--gold2);
+}
+.origin-symbol  { font-size:1.6rem; margin-bottom:6px; }
+.origin-name    { font-family:var(--font-ui); font-size:0.92rem; color:var(--gold2); margin-bottom:4px; }
+.origin-desc    { font-size:0.73rem; color:var(--text2); font-style:italic; margin-bottom:5px; line-height:1.45; }
+.origin-flavour { font-size:0.68rem; color:var(--text2); opacity:0.6; font-style:italic; margin-bottom:7px; border-left:2px solid var(--border); padding-left:7px; }
+.origin-bonuses { display:flex; flex-wrap:wrap; gap:4px; margin-bottom:5px; }
+.origin-bonus   { font-size:0.65rem; font-family:var(--font-ui); padding:1px 6px; background:rgba(90,60,10,0.25); border:1px solid var(--border); color:var(--gold); }
+.origin-bonus.gold-bonus    { color:var(--gold2); }
+.origin-bonus--magic        { border-color:#6a3090 !important; color:#b070e0 !important; }
+.origin-bonus--coin         { color:var(--gold2) !important; }
+.origin-item    { font-size:0.68rem; color:var(--green2); font-style:italic; }
+
+/* Origin card updated layout */
+.origin-card-top {
+    display: flex; align-items: flex-start; gap: 10px; margin-bottom: 6px;
+}
+.origin-card-heading { flex: 1; }
+.origin-magic-badge  { font-size: 0.62rem; color: #a060d0; font-style: italic; margin-top: 2px; }
+
+/* Stat bars inside selected origin card */
+.origin-stat-bars {
+    margin-top: 10px; display: flex; flex-direction: column; gap: 5px;
+    border-top: 1px solid var(--border); padding-top: 9px;
+}
+.origin-bar-row   { display: flex; align-items: center; gap: 7px; }
+.origin-bar-label {
+    font-family: var(--font-ui);
+    font-size: 0.65rem; color: var(--text2); width: 34px; text-align: right; flex-shrink: 0;
+}
+.origin-bar-track {
+    flex: 1; height: 6px; background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border); position: relative; overflow: visible;
+}
+.origin-bar-base  { position: absolute; top: 0; left: 0; height: 100%; background: var(--border2); transition: width 0.2s; }
+.origin-bar-bonus { position: absolute; top: 0; left: 0; height: 100%; background: var(--gold);   transition: width 0.2s; }
+.origin-bar-val   { font-family: var(--font-ui); font-size: 0.78rem; color: var(--text); width: 42px; }
+.origin-bar-gain  { color: var(--green2); font-size: 0.65rem; font-style: normal; }
+
+/* Lore toggle */
+.origin-lore-toggle {
+    margin-top: 8px; font-size: 0.68rem; color: var(--text2);
+    cursor: pointer; user-select: none;
+}
+.origin-lore-toggle:hover { color: var(--gold); }
+.origin-lore {
+    margin-top: 5px; font-size: 0.7rem; color: var(--text2);
+    font-style: italic; line-height: 1.5; border-left: 2px solid var(--border2);
+    padding-left: 8px;
+}

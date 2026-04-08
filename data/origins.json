@@ -1,0 +1,122 @@
+[
+  {
+    "id": "soldier",
+    "name": "Demobilised Soldier",
+    "desc": "You served a government contract for eight years, Class A augment-rated, two tours in active suppression zones. When the budget cuts came through, they handed you a severance code and a thank-you form. You kept your training and your discipline. Neither has deprecated.",
+    "flavour": "\"They called us assets once. Then the asset line got trimmed.\"",
+    "statBonus": { "str": 3, "end": 2, "lead": 1, "cun": 0 },
+    "magicBonus": 0,
+    "startingBronze": 80,
+    "startingItem": "Military-Issue Mana-Dampener Vest",
+    "portraitSymbol": "⚔",
+    "lore": "Fought in two border enforcement actions and one full suppression campaign. The suppression campaign was the one they didn't put in the official record."
+  },
+  {
+    "id": "hedge_knight",
+    "name": "Independent Field Operative",
+    "desc": "You carry a Class B field operative certification but no current employer, no retainer, and no active contract. Your last company dissolved mid-operation over a payment dispute. You walked out of the field with your gear and your rating intact.",
+    "flavour": "\"A certified operative without a contract is just a person with expensive augments and a grievance.\"",
+    "statBonus": { "str": 2, "end": 1, "lead": 3, "cun": 0 },
+    "magicBonus": 0,
+    "startingBronze": 120,
+    "startingItem": "Expired Field Operative Badge",
+    "portraitSymbol": "🛡",
+    "lore": "Trained under the old contractors' guild curriculum, which means you know how to negotiate a room and how to put someone through a wall. Both remain equally useful."
+  },
+  {
+    "id": "outrider",
+    "name": "Recon Specialist",
+    "desc": "You ran advance recon for combined-arms units, mapping mana-grid blind spots and plotting insertion routes through monitored territory. You learned that official maps and actual terrain are two different documents, and the discrepancies are where the work happens.",
+    "flavour": "\"If they pick up your mana-sig, you were already too slow.\"",
+    "statBonus": { "str": 1, "end": 2, "lead": 0, "cun": 3 },
+    "magicBonus": 0,
+    "startingBronze": 60,
+    "startingItem": "Mana-Suppressed Recon Kit",
+    "portraitSymbol": "🏹",
+    "lore": "Three years embedded with advance units, two more freelance. The freelance years were quieter and considerably stranger."
+  },
+  {
+    "id": "pit_fighter",
+    "name": "Circuit Fighter",
+    "desc": "The augment-assisted combat circuits are technically unregulated entertainment. You were very good at them. The crowd paid to watch your mana-output readouts spike. You won enough bouts to buy out your venue contract and walk.",
+    "flavour": "\"Pain is just your nervous system filing a complaint. I have learned to table those complaints.\"",
+    "statBonus": { "str": 4, "end": 3, "lead": 0, "cun": 0 },
+    "magicBonus": 0,
+    "startingBronze": 40,
+    "startingItem": "Reinforced Combat Gauntlets",
+    "portraitSymbol": "👊",
+    "lore": "Forty-one recorded bouts. Three losses by points. Zero losses by incapacitation. The circuit promoters still call."
+  },
+  {
+    "id": "ruined_noble",
+    "name": "Defunct Executive",
+    "desc": "Your holding company was dissolved — regulatory action, hostile acquisition, or both. What remains is your professional network, your education, and an absolute refusal to end your career in debt. You have read extensively. Some of it turned out to be directly applicable.",
+    "flavour": "\"I have not failed. I am between operational phases.\"",
+    "statBonus": { "str": 0, "end": 1, "lead": 2, "cun": 3 },
+    "magicBonus": 0,
+    "startingBronze": 200,
+    "startingItem": "Platinum Corporate Seal (Defunct)",
+    "portraitSymbol": "👑",
+    "lore": "The company library contained some peculiar technical volumes on pre-Accord arcane theory. You read most of them. You understood roughly a third."
+  },
+  {
+    "id": "deserter",
+    "name": "Contract Breach",
+    "desc": "You walked off an active deployment before the operation that buried your unit. The official record says 'unresolved absence'. You carry it like extra armour — it has made you the most situationally aware person in any room you enter.",
+    "flavour": "\"I didn't run. I updated my threat assessment and acted accordingly.\"",
+    "statBonus": { "str": 1, "end": 3, "lead": 0, "cun": 2 },
+    "magicBonus": 0,
+    "startingBronze": 30,
+    "startingItem": "Lifted Officer's Access Card",
+    "portraitSymbol": "🌑",
+    "lore": "You knew the operation was compromised before the briefing ended. You have been trying to determine whether that was analysis, instinct, or something from further down."
+  },
+  {
+    "id": "sellsword",
+    "name": "Career Contractor",
+    "desc": "You have never worked for anyone who wasn't paying you by the contract. Grew up in PMC staging camps, understood mana-credit accounting before arithmetic, and earned your Class B rating before most people get their first posting. You know exactly what this life costs because you have been invoiced for it.",
+    "flavour": "\"Everyone has a price. Mine is in the contract. That makes it more honest than most arrangements.\"",
+    "statBonus": { "str": 2, "end": 2, "lead": 1, "cun": 1 },
+    "magicBonus": 0,
+    "startingBronze": 100,
+    "startingItem": "Pre-Signed Contractor Boilerplate",
+    "portraitSymbol": "💰",
+    "lore": "Fourteen PMCs in twelve years. Left most of them before they collapsed. You are good at reading the signs of a company that has peaked."
+  },
+  {
+    "id": "hedge_witch",
+    "name": "Field Ritualist",
+    "desc": "Your training came from a practical tradition — hedge-magic lineage that prioritises reliable low-output workings over impressive theoretical bandwidth. You cannot output the mana-volume of a licensed mage, but your workings do not fail in the field. Which puts you ahead of most licensed mages.",
+    "flavour": "\"I cannot spike the readout. I can make sure yours doesn't cut out when you need it.\"",
+    "statBonus": { "str": 0, "end": 2, "lead": 1, "cun": 3 },
+    "magicBonus": 3,
+    "startingBronze": 60,
+    "startingItem": "Portable Ward Kit & Chalk Array",
+    "portraitSymbol": "🌿",
+    "lore": "Three settlements still maintain wards she originally set. She is not sure if they keep them from gratitude or habit, but the nodes are still active."
+  },
+  {
+    "id": "failed_scholar",
+    "name": "Expelled Accord Academic",
+    "desc": "You passed every theoretical module at the Accord's Licensed Arcane Institute. Your practical assessments were catastrophic, spectacular, and are apparently still cited in faculty safety briefings. The theoretical knowledge is intact. The institutional caution is entirely absent.",
+    "flavour": "\"I know the precise mechanism of every failure I have produced. That is my edge.\"",
+    "statBonus": { "str": 0, "end": 1, "lead": 2, "cun": 4 },
+    "magicBonus": 5,
+    "startingBronze": 50,
+    "startingItem": "Annotated Institute Manual (Heavily Redacted)",
+    "portraitSymbol": "📖",
+    "lore": "Four formal expulsions across three accredited institutes. The fourth was technically filed as a voluntary withdrawal. The timing was suspicious. You have opinions about the faculty and share them freely."
+  },
+  {
+    "id": "war_cleric",
+    "name": "Unaffiliated Accord Cleric",
+    "desc": "You served a militant ecclesial order until a doctrinal disagreement ended your contract. The divine mana-channel you work with is genuine — you have empirical evidence — and appears to bear no particular grievance about your operational independence. You are still forming an opinion about what that means.",
+    "flavour": "\"My channel is intact. My institutional affiliation is under renegotiation.\"",
+    "statBonus": { "str": 2, "end": 3, "lead": 2, "cun": 0 },
+    "magicBonus": 4,
+    "startingBronze": 70,
+    "startingItem": "Decommissioned Order Resonance Badge",
+    "portraitSymbol": "✝",
+    "lore": "The order formally dissolved eighteen months after the separation. She does not believe those events are causally linked. She thinks about it on a regular basis."
+  }
+]

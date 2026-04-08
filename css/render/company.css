@@ -1,0 +1,31 @@
+/* ===================== COMPANY TAB ===================== */
+.company-stats {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:12px; margin-bottom:12px;
+    display:grid; grid-template-columns:1fr 1fr; gap:8px;
+}
+.cstat-label { font-size:0.7rem; color:var(--text2); font-style:italic; }
+.cstat-val   { font-family:var(--font-ui); font-size:1.05rem; color:var(--gold2); }
+
+.fame-bar-wrap { margin-bottom:14px; }
+.fame-bar      { height:11px; background:rgba(0,0,0,0.4); border:1px solid var(--border); overflow:hidden; }
+.fame-bar-fill { height:100%; background:linear-gradient(90deg,#703010,#c07028); transition:width 0.4s; }
+.fame-label    { display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text2); margin-top:2px; }
+
+.milestone-row  { display:flex; gap:8px; align-items:flex-start; margin-bottom:9px; font-size:0.78rem; padding:6px 8px; background:rgba(0,0,0,0.15); border:1px solid rgba(90,60,10,0.2); }
+.milestone-row.done { border-color:rgba(200,140,30,0.25); background:rgba(200,140,30,0.05); }
+.milestone-icon { font-size:0.95rem; margin-top:1px; flex-shrink:0; }
+.milestone-label{ font-family:var(--font-ui); color:var(--text2); }
+.milestone-row.done .milestone-label { color:var(--gold2); }
+.milestone-desc { font-size:0.7rem; color:var(--text2); font-style:italic; }
+.milestone-flavour { font-size:0.68rem; color:var(--gold); margin-top:2px; font-style:italic; opacity:0.8; }
+
+/* Roster member names */
+.member-name  { font-size:0.85rem; color:var(--text); }
+.member-class { font-size:0.72rem; color:var(--text2); }
+
+/* Company magic bar */
+.magic-bar-wrap { margin-bottom: 10px; }
+.magic-bar      { height: 8px; background: rgba(0,0,0,0.4); border: 1px solid #4a2080; overflow: hidden; }
+.magic-bar-fill { height: 100%; background: linear-gradient(90deg, #4a2080, #a060d0); transition: width 0.4s; }
+.magic-bar-label { display: flex; justify-content: space-between; font-size: 0.68rem; color: var(--text2); margin-top: 2px; }

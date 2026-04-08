@@ -1,0 +1,133 @@
+[
+  {
+    "id": "thornmark",
+    "name": "The Thornmark Combine",
+    "type": "duchy",
+    "desc": "A semi-autonomous trade combine whose board of directors funds sixty percent of the regional defence budget. They run three mana-refineries, a rail hub, and a licensed mercenary oversight bureau. Business is their religion — and you are affecting their margins.",
+    "flag": "⚜",
+    "color": "#8a6020",
+    "fearColor": "#c09040",
+    "toleranceThresholds": {
+      "notice":    100,
+      "concern":   300,
+      "alarm":     600,
+      "hostile":  1000,
+      "war":      1800
+    },
+    "responses": {
+      "notice":  "Thornmark's Contract Review Board has flagged the Iron Company in their quarterly risk assessment. You are rated 'elevated, monitoring required'.",
+      "concern": "Thornmark has increased border checkpoint frequency on the fort access road. They are photographing your personnel.",
+      "alarm":   "Thornmark's legal division has filed a formal objection with the Continental Accord Licensing Authority. Your Class B clearance is under review.",
+      "hostile": "Thornmark has embargoed all commercial dealings with Iron Company-affiliated accounts. Mana-credit transfers from their territory are blocked.",
+      "war":     "Thornmark's board has authorised a full suppression contract against the Iron Company. They have already retained a competitor."
+    },
+    "suppressionStrength": 3,
+    "startRelation": "neutral",
+    "pmcTierNotice": 1
+  },
+  {
+    "id": "veldrath",
+    "name": "The Veldrath Republic",
+    "type": "kingdom",
+    "desc": "A militarised republic whose standing forces number forty thousand, all augment-rated at Class A or above. Their defence minister has never lost a military engagement. He considers independent military contractors a constitutional insult.",
+    "flag": "⚔",
+    "color": "#602020",
+    "fearColor": "#c04030",
+    "toleranceThresholds": {
+      "notice":    200,
+      "concern":   500,
+      "alarm":     900,
+      "hostile":  1500,
+      "war":      2500
+    },
+    "responses": {
+      "notice":  "Veldrath's Defence Intelligence Office has entered the Iron Company into their active monitoring database. You are Category 3. There are only four categories.",
+      "concern": "Veldrath's border units now carry orders to log Iron Company mana-signatures. They are not yet orders to engage.",
+      "alarm":   "Veldrath's Defence Minister addressed a press briefing. You were the subject. The framing was not favourable.",
+      "hostile": "Veldrath has deployed a quiet-operations team with Iron Company personnel on the target list. They have not arrived yet.",
+      "war":     "Veldrath has formally designated the Iron Company an unlicensed armed entity under the Defence Compact. Mobilisation orders are active."
+    },
+    "suppressionStrength": 5,
+    "startRelation": "wary",
+    "pmcTierNotice": 2
+  },
+  {
+    "id": "pale_conclave",
+    "name": "The Pale Conclave",
+    "type": "theocracy",
+    "desc": "A distributed ecclesiastical authority spanning seven city-states, each with its own mana-grid node consecrated to their doctrine. They maintain the most thorough arcane-monitoring network on the continent and hold licences that pre-date the Accord by three centuries. They object to your arcane activities on grounds that are simultaneously theological and regulatory.",
+    "flag": "✝",
+    "color": "#404880",
+    "fearColor": "#8090d0",
+    "toleranceThresholds": {
+      "notice":    80,
+      "concern":   200,
+      "alarm":     450,
+      "hostile":   800,
+      "war":      1400
+    },
+    "responses": {
+      "notice":  "The Pale Conclave's Arcane Oversight Division has published a doctrinal brief on independent mana-use. It cites the Iron Company specifically.",
+      "concern": "Conclave Auditors have been observed near the fort with resonance equipment. They are logging your mana-output levels.",
+      "alarm":   "The Conclave has issued a Provisional Licence Suspension against your arcane operations in three affiliated jurisdictions.",
+      "hostile": "The Conclave has invoked Covenant Article 7. Iron Company personnel are barred from Conclave-licensed mana-infrastructure in any member state.",
+      "war":     "The Conclave has issued a full Revocation Writ. Their Enforcement Division is mobilising."
+    },
+    "suppressionStrength": 4,
+    "startRelation": "suspicious",
+    "pmcTierNotice": 1,
+    "triggersOnArcaneJobs": true
+  },
+  {
+    "id": "iron_league",
+    "name": "The Iron League",
+    "type": "alliance",
+    "desc": "A coalition of six city-states sharing a unified mana-grid, a joint intelligence bureau, and a Combined Accord Military signed into treaty seventy years ago. No single member is a serious military power alone — together they have outlasted three republics and one empire. They are methodical and they do not forget.",
+    "flag": "⚙",
+    "color": "#505050",
+    "fearColor": "#909090",
+    "toleranceThresholds": {
+      "notice":    150,
+      "concern":   400,
+      "alarm":     800,
+      "hostile":  1400,
+      "war":      2200
+    },
+    "responses": {
+      "notice":  "The Iron League's Joint Intelligence Bureau has opened an operational file on the Iron Company. The file is currently labelled 'preliminary'.",
+      "concern": "The Iron League has passed an internal resolution expressing 'coordinated concern' about unlicensed military expansion. You are named in the annexe.",
+      "alarm":   "The Iron League has formally requested that three regional authorities restrict Iron Company operational territory. Two have complied.",
+      "hostile": "The Iron League has activated the Mutual Suppression Compact. Member states are legally bound to deny Iron Company personnel transit and mana-credit access.",
+      "war":     "The Iron League has invoked the Combined Military Compact. Six integrated forces are operating under unified command."
+    },
+    "suppressionStrength": 6,
+    "startRelation": "neutral",
+    "pmcTierNotice": 3
+  },
+  {
+    "id": "ashwood_empire",
+    "name": "The Ashwood Accord",
+    "type": "empire",
+    "desc": "The largest political entity on the continent by territorial coverage, mana-grid capacity, and standing military. The Accord Chancellor has not personally authorised action against anything smaller than a republic in thirty years. The fact that your company is now in their threat register is not a good sign.",
+    "flag": "👑",
+    "color": "#6a3000",
+    "fearColor": "#d06010",
+    "toleranceThresholds": {
+      "notice":    500,
+      "concern":  1000,
+      "alarm":    2000,
+      "hostile":  3500,
+      "war":      6000
+    },
+    "responses": {
+      "notice":  "An Accord Regulatory Form has arrived requiring the Iron Company to disclose personnel count, mana-output ratings, and territorial footprint. This is not routine.",
+      "concern": "Accord Strategic Analysis has classified the Iron Company as a 'Tier 2 Independent Military Entity'. This classification comes with passive surveillance.",
+      "alarm":   "The Accord Parliament has formally debated the Iron Company question. No consensus was reached. That means they are still deciding how seriously to take you.",
+      "hostile": "The Accord has repositioned a full combined-arms division to 'regional stability operations' near your territory. They are very visible. They are not engaging. Yet.",
+      "war":     "The Chancellor has personally signed the Suppression Mandate. The full weight of Accord military and intelligence capability is now directed at the Iron Company."
+    },
+    "suppressionStrength": 9,
+    "startRelation": "indifferent",
+    "pmcTierNotice": 4
+  }
+]

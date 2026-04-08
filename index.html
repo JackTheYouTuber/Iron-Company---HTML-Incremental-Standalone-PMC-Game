@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iron Company</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+  <!-- Shell mount point. All game DOM is injected by js/loader/dom.js -->
+  <div id="app"></div>
+
+  <!-- ── Client logging (must be first — catches boot errors) ── -->
+  <script src="js/clientLog.js"></script>
+
+  <!-- ── Loader chain (must be first) ── -->
+  <script src="js/loader/boot.js"></script>
+  <script src="js/loader/assets.js"></script>
+
+  <!-- ── Data ── -->
+  <script src="js/data.js"></script>
+
+  <!-- ── State & utilities ── -->
+  <script src="js/state.js"></script>
+  <script src="js/utils.js"></script>
+
+  <!-- ── Engine (pure data interpreter) ── -->
+  <script src="js/engine.js"></script>
+
+  <!-- ── Logic ── -->
+  <script src="js/logic/recruits.js"></script>
+  <script src="js/logic/progression.js"></script>
+  <script src="js/logic/actions.js"></script>
+  <script src="js/logic/nations.js"></script>
+
+  <!-- ── Settings ── -->
+  <script src="js/settings.js"></script>
+
+  <!-- ── UI engine (must come before widgets and render) ── -->
+  <script src="js/widgets/Widget.js"></script>
+  <script src="js/ui/WidgetRegistry.js"></script>
+  <script src="js/ui/ScreenEngine.js"></script>
+
+  <!-- ── Widgets (each self-registers with WidgetRegistry) ── -->
+  <script src="js/widgets/HeaderWidgets.js"></script>
+  <script src="js/widgets/OverlayWidgets.js"></script>
+  <script src="js/widgets/CollapsibleWidget.js"></script>
+  <script src="js/widgets/CommanderCardWidget.js"></script>
+  <script src="js/widgets/StatWidgets.js"></script>
+  <script src="js/widgets/RosterListWidget.js"></script>
+  <script src="js/widgets/ContractWidgets.js"></script>
+  <script src="js/widgets/HireWidgets.js"></script>
+  <script src="js/widgets/FortWidgets.js"></script>
+  <script src="js/widgets/CompanyWidgets.js"></script>
+  <script src="js/widgets/MiscWidgets.js"></script>
+
+  <!-- ── Render (widget implementations — called by widgets) ── -->
+  <script src="js/render/hud.js"></script>
+  <script src="js/render/roster.js"></script>
+  <script src="js/render/jobs.js"></script>
+  <script src="js/render/hire.js"></script>
+  <script src="js/render/fort.js"></script>
+  <script src="js/render/company.js"></script>
+  <script src="js/render/saves.js"></script>
+  <script src="js/render/nations.js"></script>
+  <script src="js/render/settings.js"></script>
+  <script src="js/render/index.js"></script>
+
+  <!-- ── Character Creation ── -->
+  <script src="js/charCreation/state.js"></script>
+  <script src="js/charCreation/names.js"></script>
+  <script src="js/charCreation/render.js"></script>
+  <script src="js/charCreation/confirm.js"></script>
+  <script src="js/charCreation/index.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- ── Loader entry point (must be last) ── -->
+  <script src="js/loader/init.js"></script>
+
+</body>
+</html>

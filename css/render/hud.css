@@ -1,0 +1,83 @@
+/* ===================== SECTION LABEL ===================== */
+.section-label {
+    font-family: var(--font-ui);
+    font-size: 0.72rem; letter-spacing: 3px; color: var(--text2);
+    text-transform: uppercase;
+    margin: 12px 0 6px; padding-bottom: 4px;
+    display: flex; align-items: center; gap: 6px;
+    border-bottom: 1px solid var(--border);
+}
+.section-label::after { content:''; flex:1; height:1px; background:var(--border); }
+
+/* ===================== NOTICE / DIVIDER ===================== */
+.notice {
+    background:rgba(90,60,10,0.1); border:1px solid var(--border);
+    padding:9px 12px; font-style:italic; font-size:0.8rem;
+    color:var(--text2); text-align:center; margin-bottom:10px;
+}
+.divider { text-align:center; color:var(--border2); font-size:0.78rem; margin:10px 0; letter-spacing:5px; }
+
+/* ===================== TABS ===================== */
+.tab-bar {
+    display:flex; gap:1px; margin-bottom:14px;
+    border-bottom:1px solid var(--border); flex-wrap:wrap;
+}
+.tab-btn {
+    padding:5px 12px; font-family:var(--font-ui);
+    font-size:0.72rem; letter-spacing:2px; color:var(--text2);
+    cursor:pointer; border:none; background:none;
+    border-bottom:2px solid transparent; margin-bottom:-1px;
+    transition:color 0.15s, border-color 0.15s;
+}
+.tab-btn:hover { color:var(--text); }
+.tab-btn.active { color:var(--gold2); border-bottom-color:var(--gold2); }
+
+.tab-content { display:none; }
+.tab-content.active { display:block; }
+
+/* ===================== LOG ===================== */
+.log-panel {
+    border-top:2px solid var(--border); height:115px;
+    display:flex; flex-direction:column; overflow:hidden; flex-shrink:0;
+}
+.log-header { padding:3px 14px; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:8px; }
+.log-header-label { font-family:var(--font-ui); font-size:0.68rem; letter-spacing:3px; color:var(--text2); }
+.log-inner  {
+    overflow-y:auto; flex:1; padding:6px 14px;
+    display:flex; flex-direction:column-reverse;
+    scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+}
+.log-entry      { font-size:0.8rem; line-height:1.55; color:var(--text); padding:2px 0; border-bottom:1px solid rgba(74,56,16,0.12); animation:fadeIn 0.3s ease; }
+.log-entry .log-time { color:var(--text2); font-style:italic; margin-right:8px; font-size:0.72rem; }
+.log-time   { color:var(--text2); font-size:0.72rem; margin-right:6px; }
+.log-entry.good { color:var(--green2); }
+.log-entry.bad  { color:#b06040; }
+.log-entry.info { color:var(--text); }
+.log-entry.gold { color:var(--gold2); }
+
+@keyframes fadeIn { from{opacity:0;transform:translateY(3px)} to{opacity:1;transform:none} }
+
+/* ===================== BADGES ===================== */
+.badge {
+    display:inline-block; padding:1px 5px; font-size:0.62rem;
+    font-family:var(--font-ui);
+    background:rgba(90,60,10,0.28); border:1px solid var(--border);
+    color:var(--gold); margin-left:4px; vertical-align:middle;
+}
+.badge.green { background:rgba(40,100,20,0.25); border-color:var(--green2); color:var(--green2); }
+
+/* ===================== TOAST ===================== */
+#toast {
+    position:fixed; bottom:130px; left:50%; transform:translateX(-50%);
+    background:#1e1608; border:2px solid var(--gold);
+    color:var(--gold2); font-family:var(--font-ui);
+    padding:9px 20px; font-size:0.88rem; z-index:500;
+    pointer-events:none; opacity:0; transition:opacity 0.3s;
+    letter-spacing:2px; white-space:nowrap;
+}
+#toast.show { opacity:1; }
+
+/* ===================== SCROLLBARS ===================== */
+::-webkit-scrollbar       { width:4px; height:4px; }
+::-webkit-scrollbar-track { background:transparent; }
+::-webkit-scrollbar-thumb { background:var(--border); border-radius:2px; }

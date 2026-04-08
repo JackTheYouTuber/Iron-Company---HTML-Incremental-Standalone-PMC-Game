@@ -1,0 +1,182 @@
+{
+  "_comment": "Declarative screen layout for Iron Company. The ScreenEngine reads this file and builds the DOM, then instantiates the named widget into each slot. To add a panel, tab, or widget — edit here. No JS changes required for layout changes.",
+
+  "header": {
+    "widgets": [
+      { "slot": "header-left",    "widget": "BrandWidget",         "config": {} },
+      { "slot": "header-center",  "widget": "ActiveSummaryWidget", "config": {} },
+      { "slot": "header-right",   "widget": "CurrencyHudWidget",   "config": {} }
+    ]
+  },
+
+  "overlays": [
+    { "id": "notif-panel",          "widget": "NotificationDrawerWidget", "config": {} },
+    { "id": "char-creation-overlay","widget": "CharCreationWidget",       "config": {} },
+    { "id": "save-select-overlay",  "widget": "SaveSelectWidget",         "config": {} }
+  ],
+
+  "panels": [
+    {
+      "id":       "left-panel",
+      "position": "left",
+      "widgets": [
+        {
+          "widget": "CommanderCardWidget",
+          "config": { "alwaysVisible": true }
+        },
+        {
+          "widget": "CollapsibleWidget",
+          "config": {
+            "id":      "cmd-details-section",
+            "label":   "Stats & Details",
+            "open":    false,
+            "children": [
+              { "widget": "StatGridWidget",  "config": {} },
+              { "widget": "CommanderItemWidget", "config": {} },
+              { "widget": "CompanyMagicWidget",  "config": {} }
+            ]
+          }
+        },
+        {
+          "widget": "CollapsibleWidget",
+          "config": {
+            "id":        "roster-section",
+            "label":     "Warband",
+            "badgeId":   "roster-count-badge",
+            "open":      true,
+            "children":  [
+              { "widget": "RosterListWidget", "config": {} }
+            ]
+          }
+        }
+      ]
+    },
+
+    {
+      "id":       "center-panel",
+      "position": "center",
+      "tabs": [
+        {
+          "id":    "jobs",
+          "label": "Contracts",
+          "subtabs": [
+            {
+              "id":    "jobs-available",
+              "label": "Available",
+              "default": true,
+              "widgets": [
+                { "widget": "JobListWidget", "config": { "mode": "available" } }
+              ]
+            },
+            {
+              "id":    "jobs-active",
+              "label": "Active",
+              "badgeId": "active-jobs-badge",
+              "subsubtabs": [
+                {
+                  "id":    "active-once",
+                  "label": "Once",
+                  "default": true,
+                  "widgets": [
+                    { "widget": "ActiveJobsWidget", "config": {} }
+                  ]
+                },
+                {
+                  "id":    "active-repeat",
+                  "label": "Repeating",
+                  "badgeId": "repeat-queue-badge",
+                  "widgets": [
+                    { "widget": "RepeatQueueWidget", "config": {} }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id":    "hire",
+          "label": "Hire",
+          "widgets": [
+            { "widget": "RosterCapWidget",  "config": {} },
+            { "widget": "HireListWidget",   "config": {} }
+          ]
+        },
+        {
+          "id":    "fort",
+          "label": "Fort",
+          "subtabs": [
+            {
+              "id":    "fort-upgrades",
+              "label": "Improvements",
+              "default": true,
+              "widgets": [
+                { "widget": "FortUpgradesWidget", "config": {} }
+              ]
+            },
+            {
+              "id":    "fort-status-center",
+              "label": "Status",
+              "widgets": [
+                { "widget": "FortStatusWidget", "config": {} }
+              ]
+            }
+          ]
+        },
+        {
+          "id":    "company",
+          "label": "Company",
+          "subtabs": [
+            {
+              "id":    "company-overview",
+              "label": "Overview",
+              "default": true,
+              "widgets": [
+                { "widget": "PmcTierWidget",     "config": {} },
+                { "widget": "CompanyStatsWidget","config": {} },
+                { "widget": "MagicBarWidget",    "config": {} },
+                { "widget": "FameBarWidget",     "config": {} }
+              ]
+            },
+            {
+              "id":    "company-nations",
+              "label": "Nations",
+              "badgeId": "nations-alert-badge",
+              "badgeStyle": "alert",
+              "widgets": [
+                { "widget": "NationPanelWidget", "config": {} }
+              ]
+            },
+            {
+              "id":    "company-milestones",
+              "label": "Deeds",
+              "widgets": [
+                { "widget": "MilestonesWidget", "config": {} }
+              ]
+            }
+          ]
+        },
+        {
+          "id":    "saves",
+          "label": "Chronicle",
+          "widgets": [
+            { "widget": "SavePanelWidget", "config": {} }
+          ]
+        },
+        {
+          "id":    "log",
+          "label": "Log",
+          "widgets": [
+            { "widget": "LogWidget", "config": {} }
+          ]
+        },
+        {
+          "id":    "settings",
+          "label": "⚙",
+          "widgets": [
+            { "widget": "SettingsPanelWidget", "config": {} }
+          ]
+        }
+      ]
+    }
+  ]
+}

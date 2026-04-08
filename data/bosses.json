@@ -1,0 +1,76 @@
+[
+  {
+    "_comment": "Boss encounters for the Combat tab. Unlocked at Hero Class (level 15+). Each boss is a Hero-class or near-Hero-class entity. Combat is turn-based.",
+
+    "id": "rogue_operative",
+    "name": "Rogue Field Director",
+    "tier": 1,
+    "desc": "A former Iron Company-class operator who went independent after a contract dispute ended badly. They have seventeen years of field experience, a full personal weapon loadout, and a grievance.",
+    "flavour": "They know your operational patterns because they helped write them.",
+    "minCommanderLevel": 12,
+    "hp": 800,
+    "maxHp": 800,
+    "actions": [
+      { "id": "burst_fire",      "name": "Burst Fire",           "damage": [40, 60],  "accuracy": 85, "desc": "Full-auto mana-pulse at close range." },
+      { "id": "tactical_roll",  "name": "Tactical Repositioning","damage": [0,  0],   "accuracy": 100,"desc": "Breaks targeting lock. Next attack hits for +30%.", "effect": "buff_next_30" },
+      { "id": "null_grenade",   "name": "Null-Field Grenade",    "damage": [30, 50],  "accuracy": 75, "desc": "Ward-stripping area effect. Ignores 50% of your defences." }
+    ],
+    "rewards": { "bronze": 3000, "xp": 500, "fame": 80 },
+    "lootTable": ["mana_rifle", "arcane_revolver"]
+  },
+  {
+    "id": "conclave_inquisitor_general",
+    "name": "Inquisitor-General Ashveil",
+    "tier": 2,
+    "desc": "The senior enforcement officer of the Pale Conclave. Licensed at output levels that the Accord does not publicly disclose. Their divine channel has been active for forty years without interruption. They are not afraid of you.",
+    "flavour": "They have read your file. All of it. Including the parts you thought were burned.",
+    "minCommanderLevel": 15,
+    "hp": 2000,
+    "maxHp": 2000,
+    "actions": [
+      { "id": "divine_lance",      "name": "Divine Mana Lance",    "damage": [80, 120], "accuracy": 90, "desc": "High-output divine channel strike. Penetrates standard wards." },
+      { "id": "holy_ward",         "name": "Consecration Field",   "damage": [0,   0],  "accuracy": 100,"desc": "Reduces incoming damage by 40% for 2 turns.", "effect": "self_defend_40_2t" },
+      { "id": "excommunication",   "name": "Excommunication Pulse","damage": [60, 100], "accuracy": 80, "desc": "Arcane suppression wave. Disables player mana actions for 1 turn.", "effect": "disable_magic_1t" },
+      { "id": "judgment",          "name": "Final Judgment",       "damage": [150,200], "accuracy": 70, "desc": "Full-channel strategic strike. Cooldown: 3 turns.", "cooldown": 3 }
+    ],
+    "rewards": { "bronze": 8000, "xp": 1200, "fame": 200 },
+    "lootTable": ["resonance_blade", "strategic_focus"]
+  },
+  {
+    "id": "veldrath_champion",
+    "name": "Marshal Ironwall",
+    "tier": 2,
+    "desc": "The Veldrath Republic's designated Hero-Class asset. Forty years of augmentation, three strategic campaigns, and a physical mana-output rating that would require an Accord treaty renegotiation to formally classify. They are what you are becoming, thirty years ahead.",
+    "flavour": "They fought their way here the same way you did. They are curious whether you are the next one or just another step.",
+    "minCommanderLevel": 16,
+    "hp": 2800,
+    "maxHp": 2800,
+    "actions": [
+      { "id": "augment_charge",    "name": "Augmented Charge",     "damage": [90, 130], "accuracy": 85, "desc": "Full physical output at Hero-Class velocity. Unavoidable if you don't move." },
+      { "id": "suppression_field","name": "Suppression Field",     "damage": [50, 80],  "accuracy": 90, "desc": "Blanket mana-suppression. Reduces your output by 25% for 2 turns.", "effect": "debuff_output_25_2t" },
+      { "id": "ironwall_stance",   "name": "Ironwall Stance",      "damage": [0,   0],  "accuracy": 100,"desc": "Defensive posture. Damage reduction 60% for 1 turn. Counterattack.", "effect": "defend_counter" },
+      { "id": "army_killer",       "name": "Formation Breaker",    "damage": [120,180], "accuracy": 75, "desc": "The move that made them famous. Cooldown: 4 turns.", "cooldown": 4 }
+    ],
+    "rewards": { "bronze": 12000, "xp": 1800, "fame": 350 },
+    "lootTable": ["null_cannon", "hero_sidearm"]
+  },
+  {
+    "id": "pre_accord_entity",
+    "name": "Designation: The Pale Warden",
+    "tier": 3,
+    "desc": "A pre-Accord entity of unknown origin and unclassified mana-output rating. It has been present in the deep site below the fort's confluence point since before the Accord's founding. It is aware of you. It has been watching you build. It has decided this is the appropriate time.",
+    "flavour": "The diagnostic readouts from proximity contact were flagged as equipment malfunction. They were not equipment malfunction.",
+    "minCommanderLevel": 18,
+    "hp": 6000,
+    "maxHp": 6000,
+    "actions": [
+      { "id": "null_wave",         "name": "Null-Space Wave",       "damage": [100,150], "accuracy": 80, "desc": "Cross-dimensional mana discharge. Bypasses all physical defences." },
+      { "id": "reality_fold",      "name": "Reality Fold",          "damage": [80, 120], "accuracy": 70, "desc": "Spatial distortion attack. Hits twice if it connects.", "effect": "double_hit" },
+      { "id": "ancient_ward",      "name": "Pre-Accord Ward",       "damage": [0,   0],  "accuracy": 100,"desc": "Ancient defensive structure. Halves all incoming damage for 3 turns.", "effect": "self_defend_50_3t" },
+      { "id": "strategic_output",  "name": "Strategic-Class Output","damage": [300,400], "accuracy": 60, "desc": "Pre-Accord strategic channelling. Cooldown: 5 turns.", "cooldown": 5 },
+      { "id": "void_touch",        "name": "Void Resonance",        "damage": [50, 80],  "accuracy": 95, "desc": "Persistent damage. Deals 30 damage at end of each of your turns for 3 turns.", "effect": "dot_30_3t" }
+    ],
+    "rewards": { "bronze": 30000, "xp": 5000, "fame": 800 },
+    "lootTable": ["strategic_focus", "hero_sidearm"]
+  }
+]

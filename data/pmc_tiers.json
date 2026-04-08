@@ -1,0 +1,93 @@
+[
+  {
+    "tier": 0,
+    "id":   "vagrant",
+    "name": "Unlicensed Operators",
+    "desc": "A single contractor and a handful of hired personnel, operating out of a decommissioned fort with no regulatory standing, no mana-grid connection, and no contract licence above Class C. Governments have no reason to notice you — yet.",
+    "flavour": "You are off the books. Right now that is the only advantage you have.",
+    "thresholdFame": 0,
+    "thresholdBronze": 0,
+    "thresholdRoster": 0,
+    "thresholdJobsDone": 0,
+    "nationThreatMult": 0.0,
+    "unlocks": []
+  },
+  {
+    "tier": 1,
+    "id":   "company",
+    "name": "The Iron Company",
+    "desc": "A licensed private military contractor with a registered base of operations, a Class B contract clearance, and enough operational history to take jobs that matter. Smaller governments are starting to log your mana-signature.",
+    "flavour": "You have a licence, a fort, and a reputation above zero. That is more than most manage.",
+    "thresholdFame": 150,
+    "thresholdBronze": 5000,
+    "thresholdRoster": 3,
+    "thresholdJobsDone": 5,
+    "nationThreatMult": 0.3,
+    "unlocks": ["intelligence", "political"]
+  },
+  {
+    "tier": 2,
+    "id":   "warband",
+    "name": "Iron Warband",
+    "desc": "The Iron Company has grown past the PMC bracket into something closer to a private military force. Your mana-output per engagement is being tracked by regional defence agencies. You are showing up in strategic planning documents.",
+    "flavour": "They are starting to ask who you answer to. The answer — nobody — is making them nervous.",
+    "thresholdFame": 400,
+    "thresholdBronze": 25000,
+    "thresholdRoster": 5,
+    "thresholdJobsDone": 15,
+    "nationThreatMult": 0.6,
+    "unlocks": ["territorial", "suppression_counter"]
+  },
+  {
+    "tier": 3,
+    "id":   "regiment",
+    "name": "Iron Regiment",
+    "desc": "By any practical measure, the Iron Company is now a full military regiment. Your combined mana-output per sortie exceeds several national guard units. The Accord powers have opened suppression files. Your fort registers on continental defence arrays.",
+    "flavour": "A regional governor looked at your asset profile and circled your fort on the threat map. There is no clearer measure of success.",
+    "thresholdFame": 800,
+    "thresholdBronze": 80000,
+    "thresholdRoster": 8,
+    "thresholdJobsDone": 25,
+    "nationThreatMult": 1.0,
+    "unlocks": ["nation_pressure", "proxy_war"]
+  },
+  {
+    "tier": 4,
+    "id":   "legion",
+    "name": "Iron Legion",
+    "desc": "Your operational capacity now rivals a small nation's standing military. The question major powers were asking — whether you are a threat — has been answered. They are now asking how to suppress you. Several are already too late to matter.",
+    "flavour": "The Imperial Accord security council mentioned your name in a classified briefing. They did not say it warmly.",
+    "thresholdFame": 1500,
+    "thresholdBronze": 250000,
+    "thresholdRoster": 12,
+    "thresholdJobsDone": 40,
+    "nationThreatMult": 1.8,
+    "unlocks": ["nation_war", "counter_intelligence"]
+  },
+  {
+    "tier": 5,
+    "id":   "iron_nation",
+    "name": "Iron Nation",
+    "desc": "The Iron Company is no longer classifiable as a PMC under any Accord definition. You control territory, maintain an independent mana-grid node, project force across borders, and run diplomatic channels that bypass conventional government entirely. You are a nation-state that happens to be incorporated.",
+    "flavour": "You did not intend for this to happen. Somehow that makes it more impressive.",
+    "thresholdFame": 2500,
+    "thresholdBronze": 750000,
+    "thresholdRoster": 18,
+    "thresholdJobsDone": 60,
+    "nationThreatMult": 3.0,
+    "unlocks": ["sovereign_ops", "shadow_government"]
+  },
+  {
+    "tier": 6,
+    "id":   "sovereign_force",
+    "name": "Sovereign Force",
+    "desc": "The Iron Company is recognised — and feared — as a power equal to any signatory of the Continental Accord. Established nations have been dissolved for less. You answer to no charter, no treaty, and no authority but your own. The mana-grid hums with your presence.",
+    "flavour": "Outer Heaven was a dream. This is what it looks like when the dream runs on mana and wire.",
+    "thresholdFame": 5000,
+    "thresholdBronze": 2000000,
+    "thresholdRoster": 24,
+    "thresholdJobsDone": 100,
+    "nationThreatMult": 5.0,
+    "unlocks": ["endgame"]
+  }
+]

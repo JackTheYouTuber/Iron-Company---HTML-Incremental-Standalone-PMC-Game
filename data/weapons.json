@@ -1,0 +1,112 @@
+[
+  {
+    "_comment": "Mana weapons. Each weapon can be equipped by the commander (via GS.commander.weapon) or carried by roster members. Bonuses use the same effect-type system as fort_upgrades.json effects[].",
+
+    "id": "mana_sidearm",
+    "name": "Mana Sidearm",
+    "category": "sidearm",
+    "rarity": "common",
+    "cost": 150,
+    "desc": "A standard-issue mana-discharge sidearm. Feeds off the user's personal mana reservoir. Every licensed contractor carries one.",
+    "flavour": "The standard. Not impressive. Extremely reliable.",
+    "statBonus": { "str": 1, "cun": 1 },
+    "magicBonus": 0,
+    "combatDamage": { "base": 8, "scaling": "str", "scalingMult": 0.5 },
+    "effects": []
+  },
+  {
+    "id": "mana_rifle",
+    "name": "Mana-Pulse Rifle",
+    "category": "rifle",
+    "rarity": "common",
+    "cost": 400,
+    "desc": "A long-range mana-discharge weapon with a three-round burst mode. Standard infantry kit for any well-funded operation.",
+    "flavour": "Accurate out to four hundred metres. The burst mode is for when accuracy is secondary to stopping power.",
+    "statBonus": { "str": 2, "end": 1 },
+    "magicBonus": 0,
+    "combatDamage": { "base": 15, "scaling": "str", "scalingMult": 0.7 },
+    "effects": [
+      { "type": "rewardMult", "value": 0.08, "categoryFilter": "combat", "desc": "+8% combat rewards" }
+    ]
+  },
+  {
+    "id": "arcane_revolver",
+    "name": "Arcane-Chamber Revolver",
+    "category": "sidearm",
+    "rarity": "uncommon",
+    "cost": 800,
+    "desc": "A precision sidearm with a rotating arcane-crystal chamber. Each crystal is pre-loaded with a specific working — null-field, binding, or penetrating mana-shot.",
+    "flavour": "Six chambers, six different problems solved. The seventh is handled by the grip.",
+    "statBonus": { "str": 1, "cun": 2 },
+    "magicBonus": 2,
+    "combatDamage": { "base": 12, "scaling": "cun", "scalingMult": 0.8 },
+    "effects": [
+      { "type": "rewardMult", "value": 0.12, "categoryFilter": "bounty", "desc": "+12% bounty rewards" }
+    ]
+  },
+  {
+    "id": "null_cannon",
+    "name": "Null-Field Cannon",
+    "category": "heavy",
+    "rarity": "uncommon",
+    "cost": 1400,
+    "desc": "A shoulder-mounted mana-cannon that projects a sustained null-field burst. Strips wards, disrupts mana-channelling, and does considerable structural damage to anything not rated for null exposure.",
+    "flavour": "Heavy. Loud. Non-negotiable.",
+    "statBonus": { "str": 3, "end": 2 },
+    "magicBonus": 0,
+    "combatDamage": { "base": 30, "scaling": "str", "scalingMult": 1.0 },
+    "effects": [
+      { "type": "suppressionResist", "value": 0.10, "desc": "+10% suppression resistance" },
+      { "type": "rewardMult", "value": 0.15, "categoryFilter": "siege", "desc": "+15% siege rewards" }
+    ]
+  },
+  {
+    "id": "resonance_blade",
+    "name": "Resonance Blade",
+    "category": "melee",
+    "rarity": "uncommon",
+    "cost": 1200,
+    "desc": "A mana-edged blade that amplifies the user's personal channelling through the cutting geometry. Effective against warded targets. Requires active mana-throughput to maintain the edge.",
+    "flavour": "It hums when you hold it. That is the mana-current running through the edge. Do not grip the wrong part.",
+    "statBonus": { "str": 2, "cun": 1 },
+    "magicBonus": 3,
+    "combatDamage": { "base": 20, "scaling": "str", "scalingMult": 0.9, "magicMult": 0.3 },
+    "effects": [
+      { "type": "rewardMult", "value": 0.15, "categoryFilter": "arcane", "desc": "+15% arcane rewards" }
+    ]
+  },
+  {
+    "id": "strategic_focus",
+    "name": "Strategic-Class Focus Array",
+    "category": "arcane",
+    "rarity": "rare",
+    "cost": 5000,
+    "desc": "A wrist-mounted mana-channelling array rated for Strategic-Class output. At full draw, the user can project mana-workings at a scale that constitutes a weapons-of-mass-application event under Accord law. Technically illegal without a Sovereign licence.",
+    "flavour": "The Accord treaty that covers this class of device was signed by seventeen states. You are the reason they are discussing a second treaty.",
+    "statBonus": { "cun": 3, "lead": 2 },
+    "magicBonus": 8,
+    "combatDamage": { "base": 80, "scaling": "cun", "scalingMult": 1.5, "magicMult": 1.0 },
+    "effects": [
+      { "type": "magicBonus", "value": 5, "desc": "+5 company arcane rating" },
+      { "type": "rewardMult", "value": 0.25, "categoryFilter": "arcane", "desc": "+25% arcane rewards" },
+      { "type": "rewardMult", "value": 0.15, "categoryFilter": "sovereign_ops", "desc": "+15% sovereign ops rewards" }
+    ]
+  },
+  {
+    "id": "hero_sidearm",
+    "name": "Hero-Class Discharge Array",
+    "category": "sidearm",
+    "rarity": "rare",
+    "cost": 8000,
+    "desc": "A purpose-built mana-discharge weapon for a Hero-Class operator. Standard weapon classifications do not apply at this output level. The discharge can penetrate fortification-grade wards and has a documented effective range against armoured formations of over two kilometres.",
+    "flavour": "At Hero-Class, the weapon is almost beside the point. Almost.",
+    "statBonus": { "str": 4, "cun": 4, "end": 2 },
+    "magicBonus": 5,
+    "combatDamage": { "base": 120, "scaling": "str", "scalingMult": 2.0, "magicMult": 0.5 },
+    "minHeroLevel": 15,
+    "effects": [
+      { "type": "rewardMult", "value": 0.30, "desc": "+30% all contract rewards" },
+      { "type": "nationThreatMult", "value": 0.10, "desc": "Known Hero-Class equipment: +10% threat generation" }
+    ]
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "_comment": "Player profiles. Each profile links a display name to a save slot and a settings snapshot. Managed by js/settings.js — do not hand-edit while the game is running.",
+
+  "_schema": {
+    "id":          "Unique profile key (e.g. 'profile_1706000000000')",
+    "displayName": "Human-readable profile name shown in the UI",
+    "saveSlot":    "Matches a key in ironcompany_saves localStorage index, or null",
+    "createdAt":   "ISO 8601 timestamp",
+    "lastPlayed":  "ISO 8601 timestamp or null",
+    "settings":    "Per-profile settings overrides — merged on top of settings.json defaults"
+  },
+
+  "profiles": []
+}

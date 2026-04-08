@@ -1,0 +1,58 @@
+/* ===================== JOB CARDS ===================== */
+.job-card {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:10px 12px; margin-bottom:8px;
+    transition:border-color 0.15s, background 0.15s;
+    position:relative; overflow:hidden;
+}
+.job-card:not(.disabled):not(.in-progress) { cursor:pointer; }
+.job-card:not(.disabled):not(.in-progress):hover { border-color:var(--gold); background:#1e1608; }
+.job-card.disabled  { opacity:0.45; }
+.job-card.in-progress { border-color:var(--gold2); }
+
+.job-name    { font-family:var(--font-ui); font-size:0.9rem; color:var(--gold2); margin-bottom:2px; }
+.job-desc    { font-style:italic; font-size:0.77rem; line-height:1.5; color:var(--text2); margin-bottom:3px; }
+.job-flavour { font-size:0.7rem; color:var(--text2); opacity:0.6; margin-bottom:6px; font-style:italic; }
+.job-meta    { display:flex; gap:10px; align-items:center; font-size:0.77rem; flex-wrap:wrap; margin-bottom:3px; }
+.job-reward  { color:var(--gold); }
+.job-xp      { color:#6080cc; }
+
+.job-req-list  { margin-top:6px; padding-top:5px; border-top:1px solid rgba(90,60,10,0.3); }
+.job-req-item  { font-size:0.7rem; color:#b05040; font-style:italic; padding:1px 0; }
+
+.active-job-time { font-size:0.72rem; color:var(--text2); margin-bottom:4px; }
+
+.job-progress      { height:4px; background:rgba(0,0,0,0.5); margin-top:5px; border:1px solid rgba(255,255,255,0.04); overflow:hidden; }
+.job-progress-fill { height:100%; background:var(--gold); width:0%; transition:width 0.1s linear; }
+
+.danger-1 { color:#70aa50; }
+.danger-2 { color:var(--gold); }
+.danger-3 { color:#c06030; }
+.danger-4 { color:#b03020; }
+
+/* Job category headers */
+.job-category-header {
+    font-family: var(--font-ui);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    color: var(--gold);
+    padding: 6px 10px 5px;
+    margin: 10px 0 5px;
+    border-left: 3px solid var(--border2);
+    background: rgba(0,0,0,0.2);
+    text-transform: uppercase;
+}
+.job-category-header.locked {
+    color: var(--text2);
+    opacity: 0.5;
+    border-left-color: var(--border);
+}
+
+/* Requirement item colouring */
+.job-req-item.req-magic     { color: #b070e0; }
+.job-req-item.req-stat      { color: #c06030; }
+.job-req-item.req-class     { color: var(--gold); }
+.job-req-item.req-upgrade   { color: var(--green2); }
+.job-req-item.req-fame      { color: #6080cc; }
+.job-req-item.req-milestone { color: var(--text2); }
+.req-nation                 { color: #e06040; }

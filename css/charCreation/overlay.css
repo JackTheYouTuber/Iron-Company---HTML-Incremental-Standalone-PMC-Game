@@ -1,0 +1,51 @@
+/* ===================== CHARACTER CREATION OVERLAY ===================== */
+.overlay {
+    display:none; position:fixed; inset:0; z-index:200;
+    background:rgba(0,0,0,0.82); backdrop-filter:blur(4px);
+    align-items:center; justify-content:center; padding:16px;
+}
+.modal {
+    background:var(--panel); border:2px solid var(--border2);
+    max-width:860px; width:100%; max-height:92vh;
+    overflow-y:auto; position:relative;
+    scrollbar-width:thin; scrollbar-color:var(--border) transparent;
+}
+.modal-header {
+    padding:18px 22px 14px; border-bottom:1px solid var(--border);
+    background:linear-gradient(180deg,rgba(30,22,6,0.95) 0%,transparent 100%);
+    position:sticky; top:0; z-index:5;
+}
+.modal-title {
+    font-family:var(--font-display); font-size:1.8rem;
+    color:var(--gold2); text-shadow:0 0 20px rgba(200,140,30,0.4);
+}
+.modal-subtitle { font-style:italic; color:var(--text2); font-size:0.82rem; margin-top:3px; }
+.modal-body  { padding:18px 22px; }
+.modal-footer{ padding:14px 22px; border-top:1px solid var(--border); display:flex; gap:10px; justify-content:flex-end; }
+
+.modal-btn {
+    padding:8px 22px; font-family:var(--font-ui);
+    font-size:0.82rem; letter-spacing:2px; cursor:pointer;
+    border:1px solid var(--border2); background:rgba(90,60,10,0.25);
+    color:var(--gold2); transition:background 0.15s, border-color 0.15s;
+}
+.modal-btn:hover     { background:rgba(90,60,10,0.45); border-color:var(--gold); }
+.modal-btn.secondary { color:var(--text2); border-color:var(--border); background:transparent; }
+.modal-btn.secondary:hover { color:var(--text); }
+
+/* Modal width variant for char creation */
+.modal--wide { max-width: 860px; width: 95vw; }
+
+/* Save-select overlay */
+.save-select-modal { max-width:480px; }
+.save-select-list  { max-height:360px; overflow-y:auto; margin-bottom:8px; }
+
+/* Shake animation */
+@keyframes shake {
+    0%,100%{transform:translateX(0)}
+    20%    {transform:translateX(-6px)}
+    40%    {transform:translateX( 6px)}
+    60%    {transform:translateX(-4px)}
+    80%    {transform:translateX( 4px)}
+}
+.shake { animation:shake 0.45s ease; }

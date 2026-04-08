@@ -1,0 +1,65 @@
+{
+  "_comment": "Edit freely. No JS files need to change.",
+  "dayDuration": 120,
+  "baseRosterSize": 3,
+  "recruitPoolBase": 3,
+  "recruitPoolPerJobsDone": 4,
+  "recruitPoolMax": 8,
+  "xpBaseFormula": {
+    "base": 100,
+    "exponent": 1.6
+  },
+  "xpJobScaling": {
+    "multiplier": 0.1,
+    "base": 0.8
+  },
+  "magicUserThreshold": 2,
+  "levelUpGains": {
+    "str": 2,
+    "end": 1,
+    "lead": 1,
+    "cun": 1,
+    "hp": 15
+  },
+  "startingStats": {
+    "str": 10,
+    "end": 10,
+    "lead": 4,
+    "cun": 4,
+    "hp": 100
+  },
+  "dangerFameDefaults": {
+    "1": 3,
+    "2": 7,
+    "3": 15,
+    "4": 25
+  },
+  "recruitCostRange": [
+    200,
+    400
+  ],
+  "autoSaveIntervalDays": 5,
+  "magicBarMax": 30,
+  "suppressionCheckIntervalDays": 8,
+  "nationThreatDecayPerDay": 0.5,
+  "suppressionPenaltyDurationDays": 7,
+  "pmcTierCategoryIcons": {
+    "intelligence": "\ud83d\udd0e",
+    "political": "\u2696",
+    "territorial": "\ud83d\uddfa",
+    "suppression_counter": "\ud83d\udee1",
+    "nation_pressure": "\u26a1",
+    "proxy_war": "\ud83c\udfad",
+    "nation_war": "\u2694",
+    "sovereign_ops": "\ud83d\udc51",
+    "suppression": "\u26a0"
+  },
+  "irregularJobCheckIntervalDays": 3,
+  "irregularJobMaxActive": 2,
+  "irregularJobWindowDays": 7,
+  "heroClassLevel": 15,
+  "heroClassStatMultPerLevel": 0.15,
+  "heroClassHpMultPerLevel": 0.2,
+  "deathPermadeath": true,
+  "rosterDeathPermanent": true
+}

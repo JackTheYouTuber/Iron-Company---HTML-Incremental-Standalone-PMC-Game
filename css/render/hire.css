@@ -1,0 +1,22 @@
+/* ===================== RECRUIT / HIRE CARDS ===================== */
+.recruit-card {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:9px 11px; margin-bottom:7px;
+}
+.recruit-name   { font-family:var(--font-ui); font-size:0.88rem; color:var(--text); }
+.recruit-class  { font-style:italic; color:var(--text2); font-size:0.73rem; margin-bottom:4px; }
+.recruit-stats  { font-size:0.73rem; display:flex; gap:10px; flex-wrap:wrap; }
+.recruit-stat span:first-child { color:var(--text2); font-style:italic; }
+
+.hire-card {
+    background:var(--parchment); border:1px solid var(--border);
+    padding:10px 12px; margin-bottom:8px;
+    cursor:pointer; transition:border-color 0.15s, background 0.15s;
+}
+.hire-card:hover:not(.disabled) { border-color:var(--gold); background:#1e1608; }
+.hire-card.disabled { opacity:0.45; cursor:not-allowed; }
+.hire-name     { font-family:var(--font-ui); font-size:0.9rem; color:var(--gold2); margin-bottom:1px; }
+.hire-class    { font-style:italic; font-size:0.73rem; color:var(--text2); margin-bottom:5px; }
+.hire-cost     { color:var(--gold); font-size:0.8rem; font-family:var(--font-ui); }
+.hire-stat-row { font-size:0.73rem; display:flex; gap:8px; flex-wrap:wrap; margin-top:4px; }
+.hire-stat-row span:first-child { color:var(--text2); font-style:italic; }

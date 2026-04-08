@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=IM+Fell+English:ital@0;1&family=IM+Fell+English+SC&display=swap');
+
+:root {
+    --bg:        #0d0b08;
+    --panel:     #131008;
+    --border:    #4a3810;
+    --border2:   #6a5020;
+    --gold:      #c8922a;
+    --gold2:     #e8b84b;
+    --silver:    #9aa0aa;
+    --bronze:    #a06030;
+    --text:      #d4bc88;
+    --text2:     #806848;
+    --red:       #a03020;
+    --green2:    #6aaa50;
+    --parchment: #191408;
+    --hp-red:    #6a1818;
+    --rare:      #a060d0;
+}
+
+*  { box-sizing: border-box; margin: 0; padding: 0; }
+em { font-style: italic; }
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    min-height: 100vh;
+    overflow-x: hidden;
+    background-image:
+        radial-gradient(ellipse at 15% 15%, rgba(90,60,15,0.09) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 85%, rgba(80,35,10,0.07) 0%, transparent 55%);
+}
+
+/* Scanline */
+body::before {
+    content:''; position:fixed; inset:0; pointer-events:none; z-index:998;
+    background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.025) 2px, rgba(0,0,0,0.025) 4px);
+}
