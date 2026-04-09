@@ -2,7 +2,7 @@
 
 > *"You are nothing yet. That is an advantage that will not last."*
 
-A browser-based incremental RPG set in a dark fantasy world. You start as a lone mercenary commander in an abandoned fort and build a private military company — contracting, hiring, fortifying, and eventually growing powerful enough that established kingdoms fear you.
+A browser-based incremental RPG set in a dark modern fantasy world. You start as a lone mercenary commander in an abandoned fort and build a private military company — contracting, hiring, fortifying, and eventually growing powerful enough that established nations fear you.
 
 The endgame is **PMC Tier 6: Sovereign Force**. Think Metal Gear Solid's Outer Heaven / Diamond Dogs, translated into medieval fantasy.
 
